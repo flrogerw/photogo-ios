@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+
+<!-- meta http-equiv="Content-Security-Policy"
+
+content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" -->
+
+<meta name="format-detection" content="telephone=no">
+
+<meta name="msapplication-tap-highlight" content="no">
+
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+
+<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="assets/css/theme.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/jquery.guillotine.css">
+
+<link rel="stylesheet" type="text/css"
+	href="assets/css/ActivaLiter-Mobile.css">
+
+<title>GoPrints by Photo & Go</title>
+
+</head>
+
+<body>
+
+
+	<div class="homeslider-container">
+
+		<div id="homeslider" class="homeslider">
+
+			<div class="slide02 slide current">
+
+				<img style="margin-top:25%" src="assets/img/ic_launcher.png">
+
+			</div>
+		</div>
+
+	</div>
+
+	<script id="home-tpl" type="text/template">
+
+<div class="wrapper">
+
+<div class="homeslider-container">
+
+<div id="homeslider" class="homeslider">
+
+<div class="slide01 slide current"><img src="assets/img/homeslide01.jpg"></div>
+
+<div class="slide02 slide "><img src="assets/img/homeslide02.jpg"></div>
+
+<div class="slide03 slide "><img src="assets/img/homeslide03.jpg"></div>
+
+<div class="slide04 slide "><img src="assets/img/homeslide04.jpg"></div>
+
+<div class="slide05 slide "><img src="assets/img/homeslide05.jpg"></div>
+
+<div class="slide06 slide "><img src="assets/img/homeslide06.jpg"></div>
+
+<div class="slide07 slide "><img src="assets/img/homeslide07.jpg"></div>
+
+<div class="slide08 slide "><img src="assets/img/homeslide08.jpg"></div>
+
+<div class="slide09 slide "><img src="assets/img/homeslide09.jpg"></div>
+
+</div>
+
+<div id="homeslider-controls" class="homeslider-controls">
+
+<div class="current"></div>
+
+<div class=""></div>
+
+<div class=""></div>
+
+<div class=""></div>
+
+<div class=""></div>
+
+<div class=""></div>
+
+<div class=""></div>
+
+<div class=""></div>
+
+<div class=""></div>
+
+</div>
+
+</div>
+
+<div class="controls-container">
+
+<div class="controls">
+
+<div class="spectrum-top"></div>
+
+<div id="start_btn" class="btn_normal btn_start"><strong>Start</strong></div>
+
+</div>
+
+</div>
+
+</div>
+
+</script>
+
+
+	<script id="image-display" type="text/template">
+
+<div id="image_display_buttons">
+
+<div id="image_display_cancel" class="image_display_button"><img src="assets/img/ic_action_discard_light.png"/>CANCEL</div><div id="image_display_done" class="image_display_button"><img src="assets/img/ic_action_done_light.png">DONE</div>
+
+</div>
+
+
+<div id="photos_wrapper">
+
+<div id="photo_list"></div>
+
+</div>
+<div id="show_more">SHOW MORE</div>
+
+</script>
+
+
+	<script id="thank_you" type="text/template">
+
+
+<div class="wrapper">
+	<div class="checkout-success">
+		<div class="message">
+			<h1>Success!</h1>
+			<p id="ship-message" class="ship-message" style="display:none">Your order will ship within 3 days. You will receive an email with tracking information.</p>
+			<p id="pickup-message" class="pickup-message" style="display:none">We will contact you when your order is ready for pickup.</p>
+			<p id="pickup-message-no-pay" class="pickup-message" style="display:none">Printing will begin when you pay at the store.</p>
+		</div>	
+<div id="thankyou_address_info" style="display: none">
+
+						<!-- h2>Address</h2 -->
+						<div id="location_title" >Photo & Go</div>
+						<div id="location_address"></div>
+						<div id="location_city"></div>
+						<div id="location_phone"></div>
+						<h2>Store Hours</h2>
+						<table id="location_hours"></table>
+					</div>	
+<div id="thankyou_social_media">
+<span class="social_icons"><a href="https://www.facebook.com"><img src="assets/img/fb_icon.png" /></a></span>
+<span class="social_icons"><a href="https://instagram.com/photoandgo_/"><img src="assets/img/ig_icon.png" /></a></span>
+<span class="social_icons"><a href="https://twitter.com/photoandgo"><img src="assets/img/twitter_icon.png" /></a></span>
+</div>
+	</div>
+	
+
+
+	<div class="controls-container">
+		<div class="controls">
+			<div class="spectrum-top"></div>
+			<div id="thank_you_back_btn" class="btn_normal btn_start"><strong>Let's do it again!</strong></div>
+		</div>
+	</div>
+</div>
+
+</script>
+
+
+
+
+
+	<script id="album-display" type="text/template">
+
+<div class="wrapper">
+
+<div class="header-controls-container">
+
+<div class="header-controls">
+
+<div id="album_display_back_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png"> Back</div>
+
+<div class="title">Albums</div>
+
+<div class="btn_cart btn_header"><img src="assets/img/cart.png"> ${{ getCart}}</div>
+
+<div class="clear"></div>
+
+<div class="spectrum-bottom"></div>
+
+</div>
+
+</div>
+
+<div class="clear"></div>
+
+
+<div id="albums_wrapper">
+
+<ul class="photo_albums" id="photo_albums"></ul>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+</script>
+
+
+
+	<script id="image-source" type="text/template">
+
+<div class="wrapper">
+
+<div class="header-controls-container">
+
+<div class="header-controls">
+
+<div id="image_source_back_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png"> Back</div>
+
+<div class="title">Photos</div>
+
+<div id="image_source_cart_btn" class="btn_cart btn_header"><img src="assets/img/cart.png"> ${{ getCart}}</div>
+
+<div class="clear"></div>
+
+<div class="spectrum-bottom"></div>
+
+</div>
+
+</div>
+
+<div class="clear"></div>
+
+
+<div class="pictures">
+
+<p>Get Your Photos From:</p>
+
+<img id="cam_src_btn" class="gallery" src="assets/img/photos-gallery.png">
+
+<img id="gram_src_btn" class="instagram" src="assets/img/photos-instagram.png">
+
+<img id="fb_src_btn" class="facebook" src="assets/img/photos-facebook.png">
+
+</div>	
+
+<div class="clear"></div>
+<div style="position:absolute;bottom:60px;">
+<button  style="display:none" id="fb_logout">Logout of Facebook</button>
+<button style="display:none" id="ig_logout">Logout of Instagram</button>
+</div>
+</div>
+</script>
+
+
+	<script id="image-edit" type="text/template">
+
+<div class="wrapper">
+
+<div class="header-controls-container">
+
+<div class="header-controls">
+
+<div id="edit_done_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png">Done</div>
+
+<div id="title" class="title">EDIT</div>
+
+<div class="btn_cart btn_header"><img src="assets/img/cart.png"> $<span id="cart_total">{{ getCart}}</span></div>
+
+<div class="clear"></div>
+
+<div class="spectrum-bottom"></div>
+
+</div>
+
+</div>
+
+<div class="clear"></div>
+
+<div class="header-message-container">
+
+<!-- div class="degree1" style="display:none">
+
+<div class="header-message">Please add X more photos or upgrade your size to Medium or Large</div>
+
+</div>
+
+<div class="degree0">
+
+<div class="header-message">Pinch to zoom. Hold & Drag to position.</div>
+
+</div -->
+
+</div>
+
+<div id="obj"></div>
+
+<div class="polaroids">
+
+<div id="edit_panel"><img src="" id="edit_image"></div>
+
+</div>
+
+<div class="clear"></div>
+
+<button id="zoom-in">zoom in</button>
+<button id="zoom-out">zoom out</button>
+<br>
+hold to drag
+<div class="clear"></div>
+
+<div class="controls-container polaroid-edit">
+
+
+
+<div class="controls">
+
+<div class="spectrum-top"></div>
+
+<div class="qty-container">
+
+<div class="clear"></div>
+
+<div class="controls-menu menu-format">
+
+<div class="format selected"><img src="assets/img/Formats-SX70.png"><br/><strong>SX 70</strong></div>
+
+<div class="format"><strong><img src="assets/img/Formats-Series80-Portrait.png"><br/>Series 80</strong><br/>Portait</div>
+
+<div class="format"><strong><img src="assets/img/Formats-Series80-Landscape.png" class="landscape"><br/>Series 80</strong><br/>Landscape</div>
+
+<div class="format"><strong><img src="assets/img/Formats-Spectra.png"><br/>Spectra</strong></div>
+
+<div class="clear"></div>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="controls-container" class="controls-container polaroid-edit">
+
+<div class="controls">
+
+<div class="spectrum-top"></div>
+
+<!-- div id="tabs" class="controls-buttons">
+
+<div id="size-tab" class="btn_normal selected">Size</div>
+
+<div id="style-tab" class="btn_normal">Style</div>
+
+</div -->
+
+<div class="clear"></div>
+
+<div id="menu-size" class="controls-menu menu-size" style="display:none">
+
+<div class="size selected small">
+
+<!-- div sku="703040" class="qty-indicator">{{ getQuantity '703040'}}</div -->
+
+<img class="polaroidicon" src="assets/img/Formats-SX70.png" width="20px"><br/><strong>Original</strong><br/>{{ getSize '703040'}} - ${{ getPrice '703040'}}
+
+<div sku="703040" class="qty"><img class="minus_count" src="assets/img/qty-minus.png" ><span>0</span><img class="plus_count" src="assets/img/qty-plus.png" ></div>
+
+</div>
+
+<div class="size medium">
+
+<!-- div sku="703047" class="qty-indicator">{{ getQuantity '703047'}}</div -->
+
+<img class="polaroidicon" src="assets/img/Formats-SX70.png" width="30px"><br/><strong>Medium</strong><br/>{{ getSize '703047'}} - ${{ getPrice '703047'}}
+
+<div sku="703047" class="qty"><img class="minus_count" src="assets/img/qty-minus.png" ><span>0</span><img class="plus_count" src="assets/img/qty-plus.png" ></div>
+
+</div>
+
+<div class="size large">
+
+<!-- div sku="703041" class="qty-indicator">{{ getQuantity '703041'}}</div -->
+
+<img class="polaroidicon" src="assets/img/Formats-SX70.png" width="40px"><br/><strong>Large</strong><br/>{{ getSize '703041'}} - ${{ getPrice '703041'}}
+
+<div sku="703041" class="qty"><img class="minus_count" src="assets/img/qty-minus.png" ><span>0</span><img class="plus_count" src="assets/img/qty-plus.png" ></div>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+
+
+<div id="menu-style" class="controls-menu menu-style">
+
+<div id="menu-format" class="menu-format">
+
+<div id="polaroid_button" class="format selected"><img src="assets/img/Formats-SX70.png"><br/><strong>SX 70</strong></div>
+
+<div id="full_frame_button_p" class="format"><strong><img src="assets/img/Formats-Series80-Portrait.png"><br/>Series 80</strong><br/>Portait</div>
+
+<div id="full_frame_button_l" class="format"><strong><img src="assets/img/Formats-Series80-Landscape.png" class="landscape"><br/>Series 80</strong><br/>Landscape</div>
+
+<div id="spectra_frame_button" class="format"><strong><img src="assets/img/Formats-Spectra.png"><br/>Spectra</strong></div>
+
+<div class="clear"></div>
+
+</div>
+
+<div id="menu-fx" class="menu-fx">
+
+<div filter="blackwhite" class="fx BW">B&amp;W</div>
+
+<div filter="sepia" class="fx Sepia">Sepia</div>
+
+<div filter="none" class="fx None">No FX</div>
+
+<!-- div class="rotate"><img src="assets/img/rotate-right-90.png"></div -->
+
+<div id="delete" class="delete"><img src="assets/img/trash.png" ></div>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</script>
+
+
+	<script id="image-preview" type="text/template">
+
+<div class="wrapper">
+
+<div class="header-controls-container">
+
+<div class="header-controls">
+
+<div id="btn_addmore" class="btn_header btn_back"><img src="assets/img/btn-back.png">Add Photos</div>
+
+<div id="title" class="title">PREVIEW</div>
+
+<div class="btn_cart btn_header"><img src="assets/img/cart.png"> $<span id="cart_total">{{ getCart}}</span></div>
+
+<div class="clear"></div>
+
+<div class="spectrum-bottom"></div>
+
+</div>
+
+</div>
+
+<div class="clear"></div>
+
+<div class="header-message-container">
+
+<div class="degree1" style="display:none">
+
+<div class="header-message">Please add X more photos or upgrade your size to Medium or Large</div>
+
+</div>
+
+<div class="degree0">
+
+<div class="header-message">Swipe to scroll. Double tap to edit or delete.</div>
+
+</div>
+
+</div>
+
+<div id="obj"></div>
+
+<div class="polaroids">
+
+<div id="swipe_panels"></div>
+
+</div>
+<div id="image_legend"></div>
+
+<div class="controls-container polaroid-edit" style="display:none">
+
+<div class="controls">
+
+<div class="spectrum-top"></div>
+
+<div class="qty-container">
+
+<div class="clear"></div>
+
+<div class="controls-menu menu-format">
+
+<div class="format selected"><img src="assets/img/Formats-SX70.png"><br/><strong>SX 70</strong></div>
+
+<div class="format"><strong><img src="assets/img/Formats-Series80-Portrait.png"><br/>Series 80</strong><br/>Portait</div>
+
+<div class="format"><strong><img src="assets/img/Formats-Series80-Landscape.png" class="landscape"><br/>Series 80</strong><br/>Landscape</div>
+
+<div class="format"><strong><img src="assets/img/Formats-Spectra.png"><br/>Spectra</strong></div>
+
+<div class="clear"></div>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="controls-container" class="controls-container polaroid-edit">
+
+<div class="controls">
+
+<div class="spectrum-top"></div>
+
+<!-- div id="tabs" class="controls-buttons">
+
+<div id="size-tab" class="btn_normal selected">Size</div>
+
+<div id="style-tab" class="btn_normal">Style</div>
+
+</div -->
+
+<div class="clear"></div>
+
+<div id="menu-size" class="controls-menu menu-size">
+
+<div class="size selected small">
+
+<!-- div sku="703040" class="qty-indicator">{{ getQuantity '703040'}}</div -->
+
+<img class="polaroidicon" src="assets/img/Formats-SX70.png"><br/><strong>Original</strong><br/>{{ getSize '703040'}} - ${{ getPrice '703040'}}
+
+<div sku="703040" class="qty"><img class="minus_count" src="assets/img/qty-minus.png" ><span>0</span><img class="plus_count" src="assets/img/qty-plus.png" ></div>
+
+</div>
+
+<div class="size medium">
+
+<!-- div sku="703047" class="qty-indicator">{{ getQuantity '703047'}}</div -->
+
+<img class="polaroidicon" src="assets/img/Formats-SX70.png"><br/><strong>Medium</strong><br/>{{ getSize '703047'}} - ${{ getPrice '703047'}}
+
+<div sku="703047" class="qty"><img class="minus_count" src="assets/img/qty-minus.png" ><span>0</span><img class="plus_count" src="assets/img/qty-plus.png" ></div>
+
+</div>
+
+<div class="size large">
+
+<!-- div sku="703041" class="qty-indicator">{{ getQuantity '703041'}}</div -->
+
+<img class="polaroidicon" src="assets/img/Formats-SX70.png"><br/><strong>Large</strong><br/>{{ getSize '703041'}} - ${{ getPrice '703041'}}
+
+<div sku="703041" class="qty"><img class="minus_count" src="assets/img/qty-minus.png" ><span>0</span><img class="plus_count" src="assets/img/qty-plus.png" ></div>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+
+
+<div id="menu-style" class="controls-menu menu-style" style="display:none">
+
+<div id="menu-format" class="menu-format">
+
+<div id="polaroid_button" class="format selected"><img src="assets/img/Formats-SX70.png"><br/><strong>SX 70</strong></div>
+
+<div id="full_frame_button_p" class="format"><strong><img src="assets/img/Formats-Series80-Portrait.png"><br/>Series 80</strong><br/>Portait</div>
+
+<div id="full_frame_button_l" class="format"><strong><img src="assets/img/Formats-Series80-Landscape.png" class="landscape"><br/>Series 80</strong><br/>Landscape</div>
+
+<div id="spectra_frame_button" class="format"><strong><img src="assets/img/Formats-Spectra.png"><br/>Spectra</strong></div>
+
+<div class="clear"></div>
+
+</div>
+
+<div id="menu-fx" class="menu-fx">
+
+<div filter="blackwhite" class="fx BW">B&amp;W</div>
+
+<div filter="sepia" class="fx Sepia">Sepia</div>
+
+<div filter="none" class="fx None">No FX</div>
+
+<!-- div class="rotate"><img src="assets/img/rotate-right-90.png" height="35px"></div -->
+
+<div id="delete" class="delete"><img src="assets/img/trash.png" ></div>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</script>
+
+
+	<script id="checkout" type="text/template">
+
+<div class="wrapper">
+	<div class="header-controls-container">
+		<div class="header-controls">
+			<div id="checkout_back_btn" class="btn_header btn_back">
+				<img src="assets/img/btn-back.png"> Back
+			</div>
+			<div class="title">Order</div>
+			<div class="total">Total: $<span id="checkout_total">{{ getCart}}</span></div>
+			<div class="clear"></div>
+			<div class="spectrum-bottom"></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="header-message-container">
+		<div class="degree1" style="display: none">
+			<div class="header-message"></div>
+		</div>
+	</div>
+
+
+	<div class="cart_overview checkout">
+		<div class="header">Order Details</div>
+		<table class="order_item_table">
+			{{#each cart_details}}
+			<tr class="cart_items">
+				<td class="cart_quantity">{{this.quantity}}</td>
+				<td class="cart_text">{{this.text}}</td>
+				<td valign="middle" class="cart_line_total">${{this.total}}</td>
+			</tr>
+			{{/each}}
+		</table>
+	</div>
+
+
+	<div id="dialog">
+		<ul class='upload_process'>
+			<li class="process_loading">Compiling Order</li>
+			<li>Compressing Images</li>
+			<li>Uploading Image <span id="image_upload_count"></span><span
+				id="status"></span></li>
+			<li>Migrating Images to the Cloud</li>
+		</ul>
+		<progress id="progressBar" value="0" max="100"></progress>
+		<strong>Progress&nbsp;&nbsp;&nbsp;<span id="progress_percent">0</span>%
+		</strong>
+	</div>
+
+
+	<div class="checkout">
+	<form id="contact_form" name="contact_form">
+		<div class="checkout-step">
+			<div class="header">My Contact Info:</div>
+
+
+
+<input class="" placeholder="Full Name" id="name" name="name"
+				value="" type="text" /> <input class="" placeholder="Mobile Phone Number"
+				id="mobile" name="mobile" value="" type="tel" /> <input class=""
+				placeholder="Email Address" id="email" name="email" value=""
+				type="email" />
+		</div>
+
+
+		<div class="checkout-step">
+			<div class="header">My Delivery Method:</div>
+
+			<input type="radio" id="delivery_options_pickup"
+				name="delivery_options" value="pick_up" checked /><label
+				class="radio">Pickup In-Store</label> <input type="radio"
+				id="delivery_options_ship" name="delivery_options" value="ship" /><label
+				class="radio">Ship within USA</label>
+
+
+			<div id="pickup_details" class="store">
+				<div class="store-selection">
+
+					<select class="" id="location_select" name="location_select" type="select">
+						<option value="0" selected>Please Select a Pickup Location</option> {{#each locations}}
+						<option value="{{this.id}}">{{this.name}}</option> {{/each}}
+					</select>
+
+					<div id="address_info" style="display: none">
+
+						<h2>Address</h2>
+						<div id="location_address"></div>
+						<div id="location_city"></div>
+						<div id="location_phone"></div>
+						<h2>Store Hours</h2>
+						<table id="location_hours"></table>
+					</div>
+				</div>
+			</div>
+
+			<div id="ship_details" style="display: none;">
+				<div class="shipping-info">
+					<br clear="all" /> <input class="name" tabindex="1"
+						placeholder="First Name" type="email" id="ship_first_name"
+						name="ship_first_name" value="" /> <input class="name"
+						tabindex="2" placeholder="Last Name" type="text"
+						id="ship_last_name" name="ship_last_name" value="" /> <input
+						class="address" tabindex="3" placeholder="Address Line 1"
+						id="ship_address" name="ship_address" value="" type="text" /> <input
+						class="address" tabindex="4" placeholder="Address Line 2"
+						id="ship_address2" name="ship_address2" value="" type="text" /> 
+						<input class="city" type="text" tabindex="5" placeholder="City" name="ship_city" id="ship_city" value="" /> 
+					
+					<select type="select" class="" tabindex="6" name="ship_state" id="ship_state">
+						{{>states_select }}
+					</select> 
+
+<input type="text" class="" tabindex="7" placeholder="Zip Code"
+						id="ship_zip" name="ship_zip" value="" pattern="[0-9]*" />
+
+				</div>
+
+			</div>
+			</div>
+			<div class="clear"></div>			
+</form>
+
+		<div class="checkout-step">
+			<div class="header">My Payment Method:</div>
+<form>
+			<input type="radio" id="payment_options_later" name="payment_options"
+				value="later" checked /><label class="radio">Pay Store Cashier</label>
+			<input style="margin-left:0px" type="radio" id="payment_options_now" name="payment_options"
+				value="now" /><label class="radio">Pay On Phone</label>
+</form>
+			<div class="clear"></div>
+<div id="payment_no_print" class="print_payment" >Printing will begin after payment is taken</div>
+<div id="payment_print" class="print_payment" style="display:none">Printing will begin immediately</div>
+
+			<div id="cc_details" style="display: none">
+				<div class="creditcard-info">
+<form id="cc_form" name="cc_form">
+					<input tabindex="1" class="creditcard"
+						placeholder="Credit Card Number" data-stripe="number"
+						value="4242424242424242" type="text" name="cc_number"/> <input tabindex="2"
+						class="ccv" placeholder="CVV" data-stripe="cvc" value="123" size=3
+						type="tel" name="ccv"/> <input name="cc_exp_month" tabindex="3" class="mm" placeholder="MM"
+						data-stripe="exp-month" value="09" size=2 type="tel" /> <input
+						tabindex="4" name="cc_exp_year" class="yyyy" placeholder="YYYY"
+						data-stripe="exp-year" value="2019" size=4 type="tel" /> <input
+						tabindex="5" name="cc_zip" class="zipcode" placeholder="Billing Zip Code"
+						data-stripe="address_zip" value="11111" size=10 type="tel" />
+</form>
+				</div>
+			</div>
+
+<div class="clear"></div>
+
+</div>
+
+			
+		
+		<div class="checkout-step">
+			<p id="total_shipping" style="display:none">Total with Shipping: $<span id="total_with_shipping_cost"></span></p>
+			<p id="total_no_shipping">Total: $<span id="total_with_shipping_cost"></span></p>
+		</div>
+		<div id="checkout_btn" class="btn_normal btn_start">
+			<strong>Checkout</strong>
+		</div>
+	</div>
+</div>
+<div class="spectrum-bottom checkout"></div>
+
+</script>
+
+
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="libs/require.js"></script>
+	<script type="text/javascript" src="libs/jquery.js"></script>
+	<script type="text/javascript" src="libs/jquery.mobile.js"></script>
+	<script type="text/javascript" src="libs/jquery.mask.js"></script>
+	<script type="text/javascript" src="libs/fastclick.js"></script>
+	<script type="text/javascript" src="libs/hammer.js"></script>
+	<script type="text/javascript" src="libs/md5.js"></script>
+	<script type="text/javascript" src="libs/handlebars.js"></script>
+	<script type="text/javascript" src="libs/jquery.mobile-events.js"></script>
+	<script type="text/javascript" src="libs/jquery.guillotine.js"></script>
+	<script type="text/javascript" src="js/FotoBarUI.js"></script>
+	<script type="text/javascript" src="js/FotoBarPayment.js"></script>
+	<script type="text/javascript" src="js/FotoBarRest.js"></script>
+	<script type="text/javascript" src="js/FotoSelect.js"></script>
+	<script type="text/javascript" src="js/FotoBar.js"></script>
+	<script type="text/javascript" src="js/FotoBarFileWriter.js"></script>
+	<script type="text/javascript" src="js/FotoBarFileReader.js"></script>
+	<script type="text/javascript" src="js/FotoBarConfig.js"></script>
+	<script type="text/javascript" src="js/FotoBarCart.js"></script>
+	<script type="text/javascript" src="js/PolaroidFactory.js"></script>
+	<script type="text/javascript" src="js/FotoBarFacebook.js"></script>
+	<script type="text/javascript" src="js/FotoBarInstagram.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="libs/jquery.ui.js"></script>
+	<!-- script type="text/javascript" src="libs/FacebookConnectPlugin.js"></script -->
+
+</body>
+
+</html>
+
+
+

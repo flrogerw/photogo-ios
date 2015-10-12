@@ -1,0 +1,375 @@
+@CHARSET "ISO-8859-1";
+
+@keyframes blink { 0% {
+	opacity: 1.0;
+}
+
+50%{
+opacity: 0.0;
+}
+
+100%{
+opacity:1.0;
+}
+}
+@-webkit-keyframes blink { 0% {
+	opacity: 1.0;
+}
+
+50% {
+opacity:0.0;
+}
+100%{
+opacity: 1.0;
+}
+}
+.blink {
+	animation: blink 2s step-start 0s infinite;
+	-webkit-animation: blink 2s step-start 0s infinite;
+}
+
+body {
+	overflow-x: hidden;
+	display: none;
+}
+
+.errorDiv {
+	z-index: 1000;
+	width: 100vw;
+	height: 5vh;
+	margin: auto;
+	position: absolute;
+	top: 18vw;
+	text-align: center;
+	padding-top: 2vh;
+	font-size: 2vh;
+	color: #f40b22;
+	font-weight: bold;
+}
+
+.succesDiv {
+	z-index: 1000;
+	width: 100vw;
+	height: 5vh;
+	margin: auto;
+	position: absolute;
+	top: 18vw;
+	text-align: center;
+	padding-top: 2vh;
+	font-size: 2vh;
+	color: #00b72e;
+	font-weight: bold;
+}
+
+.text {
+	font-size: 28px;
+	color: white;
+}
+
+#albums_wrapper {
+	position: absolute;
+	top: 10vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 100vw;
+}
+
+#image_display_buttons {
+	background-color: #dfdfdf;
+	height: 50px;
+	width: 100%;
+}
+
+.image_display_button {
+	text-align: center;
+	width: 49%;
+	display: inline-block;
+	height: 100%;
+	padding-top: 10px;
+	border-bottom-style: solid;
+	border-bottom-color: #c0c0c0;
+	margin-bottom: 10px;
+}
+
+.image_display_button img {
+	vertical-align: middle;
+}
+
+#image_display_cancel {
+	border-right-style: solid;
+	border-right-color: #c0c0c0;
+}
+
+#photos_wrapper {
+	background-color: #dfdfdf;
+	width: 100%;
+	height: 100%;
+}
+
+div.photo_list {
+	display: inline-block;
+	border: 1px solid #fff;
+	width: 31%;
+	height: 31vw;
+	margin: 1%;
+	vertical-align: top;
+	position: relative;
+}
+
+.image_check {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	height: 28px;
+	width: 28px;
+	display: none;
+}
+
+div.photo_list img {
+	vertical-align: middle;
+}
+
+ul.photo_albums {
+	list-style-type: none;
+	width: 100%;
+	padding: 0;
+}
+
+li.photo_albums_list img {
+	width: 10vh;
+	max-height: 10vh;
+	margin-right: 2vw;
+	position: absolute;
+	left: 0;
+}
+
+li.photo_albums_list {
+	width: 100vw;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	color: white;
+	font-size: 3vh;
+	font-family: 'Marydale' !important;
+	height: 11vh;
+	text-align: center;
+	margin-top: 1vh;
+}
+
+#payment-form{
+	
+	color: #fff;
+}
+
+input.none {
+	font-size: 28px;
+	border-style: none;
+	font-family: 'Marydale' !important;
+	position: absolute;
+	text-align: center;
+	margin: auto;
+	display: block;
+	z-index: 2000;
+}
+
+.image_container {
+	position: absolute;
+	overflow: hidden;
+}
+div.canvas img{
+	
+position: absolute;
+
+}
+#edit_panel{
+	position:absolute;
+}
+.canvas {
+	background-color: #fff;
+	position:relative;
+	overflow:hidden;	
+}
+
+#swipe_panels {
+	width: 100vw;
+	top: 20vh;;
+	overflow: hidden;
+	height: 50vh;
+	position: absolute;
+}
+
+.polaroid-picture-container {
+	/*position: absolute; */
+	overflow: hidden;
+	background-color: #fff;
+	display:none;
+	margin: 0 auto;
+}
+
+.blackwhite {
+	-webkit-filter: grayscale(100%) brightness(100%) contrast(100%);
+}
+
+div.fx img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.sepia {
+	-webkit-filter: sepia(100%);
+}
+/*
+#obj {
+	position: absolute;
+	top:200px;
+	height:20%;
+	background-color: #ff80ff;
+	z-index: 2300;
+}
+*/
+#progressBar {
+	width: 75vw;
+	position: relative;
+}
+
+#dialog {
+	max-height: 30vh;
+	min-height: 30vh;
+	z-index: 10000;
+	display: none;
+	border-radius: 5px;
+	border: 1px solid white;
+	position: relative;
+	color: white;
+	margin: auto;
+	width: 80vw;
+	text-align:center;
+	background-color: #000000;
+}
+
+ul.upload_process {
+	list-style: none;
+	padding-left:2vw;
+}
+
+ul.upload_process li {
+	padding-left: 25px;
+	color: gray;
+}
+
+ul.upload_process li.process_loading {
+	background-image: url(../img/spinner.gif);
+	background-repeat: no-repeat;
+	background-position: 0px center;
+	color:white;
+}
+
+ul.upload_process li.process_complete {
+	background-image: url(../img/tick.png);
+	background-repeat: no-repeat;
+	background-position: 0px center;
+	color:white;
+}
+div.thank_you{
+	width:100vw;
+	height:20vh;
+	text-align:center;
+	color:white;
+	position:absolute;
+	top: 40vh;
+}
+
+.cart_overview{
+	max-height:25vh;
+	overflow-y: auto;
+}
+
+.order_item_table{
+	color:white;
+	width:85vw;
+}
+.cart_image{
+	
+	position: relative;
+  width: 10vw;
+  height: 10vw;
+  overflow: hidden;
+  border:1px solid white;
+  display: inline-block;
+}
+
+.cart_text{
+	display: inline-block;
+	width:55vw;
+	padding-left: 1vw;
+}
+.cart_line_total{
+	display: inline-block;
+	width:15vw;
+	text-align:right;
+}
+
+img.cart_items_img{
+align:middle;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+
+	
+}
+#location_address{
+	width:100%;
+	text-align:center;
+}
+
+#location_phone{
+	width:100%;
+	text-align:center;
+}
+#location_city{
+	width:100%;
+	text-align:center;
+}
+
+.billing_cc_form .header{
+font-size: 18px;
+margin-bottom: 10px;
+text-transform: uppercase;
+}
+
+.billing_cc_form{
+background-color: #000;
+color: #fff;
+height: 100%;
+padding: 20px 5%;
+width: 90%;
+margin-top: 3vh;
+}
+
+.billing_cc_form input{
+	
+background: #000 none repeat scroll 0 0;
+border-color: #989898;
+border-image: none;
+border-style: none none solid;
+border-width: medium medium 1px;
+color: #fff;
+font-size: 14px;
+margin: 0 3% 20px;
+padding: 5px 2% 0;
+}
+
+#show_more {
+    position:absolute;
+    width:300px;
+    height:10px;
+    bottom:10px;
+    right:25%;
+    left:50%;
+    margin-left:-150px;
+    text-align: center;
+}

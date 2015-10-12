@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="libs/jquery.oauth2.js"></script>
+
+<script>
+$(document).ready(function(){
+	
+	 $.oauth2({
+	        auth_url: 'https://api.instagram.com/oauth/authorize',
+	        response_type: 'token',
+	        logout_url: 'https://instagram.com/accounts/logout',
+	        client_id: 'b544d64bbc4445d1b2a5d2ff3c14f529',
+	        redirect_uri: 'http://polaroidfotobarlv.com',
+	        other_params: {scope:'likes'}
+	    }, function(token, response){
+	       makeAPICalls(token);
+	    }, function(error, response){
+	        alert(error);
+	    }); 
+	
+});
+
+
+
+</script>
+
+</head>
+<body>
+<button id="login">login</button>
+
+</body>
+
+</html>
