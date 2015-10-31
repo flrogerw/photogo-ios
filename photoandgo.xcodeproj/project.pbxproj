@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		08B6DAEC2B6A4A82B0909116 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D7551F2EEF1F464F93F18133 /* CDVDevice.m */; };
 		0E81DF7697DA43649166DFC1 /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4DE07CC93449C9C3EC0EA /* CDVAssetLibraryFilesystem.m */; };
@@ -55,8 +56,8 @@
 		ABC1FCAF988E467996731AA6 /* UIWebViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F890C15EA0C14869B03F5363 /* UIWebViewExtension.m */; };
 		ABD0AC1431924832BC59CEBB /* CordovaFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 760343138A9941128E8CB31A /* CordovaFacebook.m */; };
 		AC2C21EF91A14C7A93CA223A /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C2CC8DBE6314EEFA7B5C033 /* CDVNotification.bundle */; };
-		AE9A49E01BCA16D50069DE46 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9A49DF1BCA16D50069DE46 /* FacebookSDK.framework */; settings = {ASSET_TAGS = (); }; };
-		AED256E21BC9AFB700FCB14E /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = AED256E11BC9AFB700FCB14E /* ic_launcher.png */; settings = {ASSET_TAGS = (); }; };
+		AE9A49E01BCA16D50069DE46 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9A49DF1BCA16D50069DE46 /* FacebookSDK.framework */; };
+		AED256E21BC9AFB700FCB14E /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = AED256E11BC9AFB700FCB14E /* ic_launcher.png */; };
 		BF4185833D2948E6B8E88F6C /* CDVCookies.m in Sources */ = {isa = PBXBuildFile; fileRef = E43B69B63F7B43DFAADC1685 /* CDVCookies.m */; };
 		C00A8530841A4E049DB48DEB /* SOSPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 229E7F34467F4608BCCB1012 /* SOSPicker.m */; };
 		C750A2FE70C54B7A8E801870 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 334C6A7AC9DB49AEB5B90428 /* CDVLogger.m */; };
