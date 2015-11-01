@@ -73,4 +73,10 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="BackupWebStorage" value="local" />
+    <gap:config-file overwrite="true" parent="UIViewControllerBasedStatusBarAppearance" platform="ios">
+        <false />
+    </gap:config-file>
+    <gap:config-file overwrite="true" parent="UIStatusBarHidden" platform="ios">
+        <true />
+    </gap:config-file>
 </widget>
