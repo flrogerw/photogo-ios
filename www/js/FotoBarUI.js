@@ -185,7 +185,7 @@ FotobarUI.prototype.addGestures = function(current_canvas) {
     // var pinch = new Hammer.Pinch();
     
     var swipe = new Hammer.Swipe({
-                                 threshold : 5,
+                                 threshold : 3,
                                  velocity : .3
                                  });
     
@@ -398,7 +398,7 @@ FotobarUI.prototype.initialize = function(image, is_new_order) {
         default:
             $(input_text).css("top", "85%");
             $(input_text).css("width", "90%");
-            $(input_text).css("margin-left", "5%");
+            $(input_text).css("margin-left", "1.5%");
             break;
             
     }

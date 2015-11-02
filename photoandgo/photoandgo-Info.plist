@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>English</string>
     <key>CFBundleDisplayName</key>
-    <string>Photo &amp; Go</string>
+    <string>GoPrints</string>
     <key>CFBundleExecutable</key>
     <string>${EXECUTABLE_NAME}</string>
     <key>CFBundleGetInfoString</key>
@@ -150,6 +150,8 @@
         </dict>
       </dict>
     </dict>
+    <key>NSHumanReadableCopyright</key>
+    <string></string>
     <key>NSMainNibFile~ipad</key>
     <string></string>
     <key>UILaunchImages</key>
@@ -255,6 +257,8 @@
         <string>{768, 1024}</string>
       </dict>
     </array>
+    <key>UILaunchStoryboardName</key>
+    <string>PhotoGo</string>
     <key>UIRequiresFullScreen</key>
     <false/>
     <key>UIStatusBarHidden</key>

@@ -5,7 +5,7 @@ var FotobarFacebook = function() {
     this.FBplugin = new CC.CordovaFacebook();
     
     
-    this.FBplugin.init('535521996587090', 'GoPrints by Photo & Go',
+    this.FBplugin.init('535521996587090', 'Photo & Go',
                 ["user_photos"],
                 function(response) {
 
@@ -118,8 +118,12 @@ FotobarFacebook.prototype.getAlbumPhotos = function(album_id) {
 	return $.Deferred(function() {
 
 		var self = this;
-		facebookConnectPlugin.api("/" + album_id + "/photos?limit="+fotobarUI.photo_limit, null, function(
-				photos) {
+                   
+                   // facebookConnectPlugin.api("/" + album_id + "/photos?limit="+fotobarUI.photo_limit+"&fields=source", null, function(photos) {
+    
+        fotobarUI.faceBook.FBplugin.graphCall(album_id + "/photos?limit="+fotobarUI.photo_limit+"&fields=source", {}, "GET", function(photos) {
+                                              
+                                              //console.log(JSON.stringify(resp));
 			
 			fotobarUI.faceBook.paginationUrl = (photos.paging.next == null )? null:photos.paging.next.replace(/^.*\/\/[^\/]+/, '');
 			if( photos.paging.next == null ){
@@ -131,7 +135,7 @@ FotobarFacebook.prototype.getAlbumPhotos = function(album_id) {
 
 				imageData = {
 					id : photos.data[count].id,
-					url : photos.data[count].images[0].source
+					url : photos.data[count].source
 				}
 
 				igImages.push(imageData);
@@ -139,7 +143,7 @@ FotobarFacebook.prototype.getAlbumPhotos = function(album_id) {
 
 			self.resolve(igImages);
 		}, function(error) {
-
+                                              console.log(error);
 			self.reject(error);
 		});
 	});
