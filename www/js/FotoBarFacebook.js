@@ -5,7 +5,7 @@ var FotobarFacebook = function() {
     this.FBplugin = new CC.CordovaFacebook();
     
     
-    this.FBplugin.init('535521996587090', 'Photo & Go',
+    this.FBplugin.init('1633834240233192', 'Photo & Go',
                 ["user_photos"],
                 function(response) {
 
@@ -33,8 +33,10 @@ FotobarFacebook.prototype.pagination = function() {
 
 		var self = this;
 		
-		facebookConnectPlugin.api( fotobarUI.faceBook.paginationUrl, null, function(photos) {
+            fotobarUI.faceBook.FBplugin.graphCall( fotobarUI.faceBook.paginationUrl, {}, "GET", function(photos) {
 
+                                                            console.log(photos);
+                                                            
 			var igImages = [];
 			
 			if(fotobarUI.faceBook.paginationUrl == null ){

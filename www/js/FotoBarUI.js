@@ -7,7 +7,7 @@ var FotobarUI = function() {
     this.max_text_length = 19;
     this.maxImageCount = 50;
     this.slider_index = 0;
-    this.photo_limit = 21;
+    this.photo_limit = 15;
     this.contact_form = {};
     this.cc_form = {};
     this.mime_types = {
@@ -78,12 +78,13 @@ FotobarUI.prototype.getNextImage = function(ev_type) {
 
 FotobarUI.prototype.showNextImage = function(ev_type) {
     
-    if( fotobar.imageCount() < 2 && ev_type != null){
+    if (fotobar.imageCount() < 2 && ev_type != null) {
         return;
     }
     
     var imageArray = Object.keys(fotobar.images).sort().reverse();
-    var current_id = (fotobarUI.current_image == null)? imageArray[0]: fotobarUI.current_image.id;
+    var current_id = (fotobarUI.current_image == null) ? imageArray[0]
+    : fotobarUI.current_image.id;
     var current_id_index = imageArray.indexOf(current_id.toString());
     var current_image = "#container_" + current_id;
     
@@ -91,21 +92,21 @@ FotobarUI.prototype.showNextImage = function(ev_type) {
             
         case ('swipeleft'):
             
-            var next_id = (current_id_index == (imageArray.length - 1))? imageArray[0]: imageArray[(current_id_index + 1)];
+            var next_id = (current_id_index == (imageArray.length - 1)) ? imageArray[0]
+            : imageArray[(current_id_index + 1)];
             
             $(current_image).animate({
                                      left : '-50%'
                                      }, 500, function() {
                                      $(current_image).css('left', '150%');
-                                     //$(current_image).appendTo('#swipe_panels');
+                                     // $(current_image).appendTo('#swipe_panels');
                                      });
             
             fotobarUI.getNextImage(ev_type);
             
-            var margin = $("#container_" + next_id).css(
-                                                        'margin-left');
-            var margin_left = (($(window).width() - $(
-                                                      "#container_" + next_id).width()) / 2)
+            var margin = $("#container_" + next_id).css('margin-left');
+            var margin_left = (($(window).width() - $("#container_" + next_id)
+                                .width()) / 2)
             + Math.abs(parseInt(margin));
             
             $("#container_" + next_id).animate({
@@ -117,7 +118,8 @@ FotobarUI.prototype.showNextImage = function(ev_type) {
             
         case ('swiperight'):
             
-            var prev_id = (current_id_index == 0)? imageArray[(imageArray.length - 1)]: imageArray[(current_id_index - 1)];
+            var prev_id = (current_id_index == 0) ? imageArray[(imageArray.length - 1)]
+            : imageArray[(current_id_index - 1)];
             
             $(current_image).animate({
                                      left : '150%'
@@ -128,10 +130,9 @@ FotobarUI.prototype.showNextImage = function(ev_type) {
             
             fotobarUI.getNextImage(ev_type);
             
-            var margin = $("#container_" + prev_id).css(
-                                                        'margin-left');
-            var margin_left = (($(window).width() - $(
-                                                      "#container_" + prev_id).width()) / 2)
+            var margin = $("#container_" + prev_id).css('margin-left');
+            var margin_left = (($(window).width() - $("#container_" + prev_id)
+                                .width()) / 2)
             + Math.abs(parseInt(margin));
             
             $("#container_" + prev_id).css('left', '-50%');
@@ -144,16 +145,13 @@ FotobarUI.prototype.showNextImage = function(ev_type) {
             
         default:
             
-            var margin = $(current_image).css(
-                                              'margin-left');
-            var margin_left = (($(window).width() - $(
-                                                      current_image).width()) / 2)
+            var margin = $(current_image).css('margin-left');
+            var margin_left = (($(window).width() - $(current_image).width()) / 2)
             + Math.abs(parseInt(margin));
             
             $(current_image).animate({
                                      left : margin_left
                                      }, 500);
-            
             
             fotobarUI.setCurrentElements(current_id);
             break;
@@ -172,9 +170,10 @@ FotobarUI.prototype.showNextImage = function(ev_type) {
                                      $(this).text(fotobarCart.getItemCount($(this).attr('sku')));
                                      });
     
-    
-    current_id_index = imageArray.indexOf( fotobarUI.current_image.id.toString() );
-    $("#image_legend").html((current_id_index + 1) + ' of ' + fotobar.imageCount());
+    current_id_index = imageArray
+    .indexOf(fotobarUI.current_image.id.toString());
+    $("#image_legend").html(
+                            (current_id_index + 1) + ' of ' + fotobar.imageCount());
 };
 
 FotobarUI.prototype.addGestures = function(current_canvas) {
@@ -226,7 +225,8 @@ FotobarUI.prototype.getImages = function() {
                                                                                                                       fotobarUI.showNextImage(null);
                                                                                                                       });
                                                                       }).fail(function() {
-                                                                              //fotobarUI.alertUser({type : 'error',text : 'Could not get images.'});
+                                                                              // fotobarUI.alertUser({type : 'error',text : 'Could not get
+                                                                              // images.'});
                                                                               }).always(function() {
                                                                                         // fotobarUI.showNextImage(null);
                                                                                         });
@@ -255,7 +255,6 @@ FotobarUI.prototype.setPolaroidCords = function(canvas_image, imageId) {
     var top = 0;
     var left = 0;
     
-    
     switch (true) {
             
         case (current_image.is_square):
@@ -263,12 +262,11 @@ FotobarUI.prototype.setPolaroidCords = function(canvas_image, imageId) {
             current_image.ty = current_image.tx = 0;
             current_image.plot_y = current_image.plot_x = 0;
             
-            
-            current_image.image_scale = ( current_image.image_width / fotobar.polaroidWidth);
+            current_image.image_scale = (current_image.image_width / fotobar.polaroidWidth);
             current_image.ty = current_image.tx = 0;
             current_image.plot_y = current_image.plot_x = 0;
-            //current_image.plot_height = current_image.image_height;
-            //current_image.plot_width = current_image.image_width;
+            // current_image.plot_height = current_image.image_height;
+            // current_image.plot_width = current_image.image_width;
             
             canvas_image.width = fotobar.polaroidWidth;
             canvas_image.height = fotobar.polaroidHeight;
@@ -284,14 +282,16 @@ FotobarUI.prototype.setPolaroidCords = function(canvas_image, imageId) {
                                                   .floor((canvas_image.width - fotobar.polaroidWidth) / 2) * -1)
             : 0;
             
-            current_image.image_scale = ( current_image.image_height / fotobar.polaroidHeight);
+            current_image.image_scale = (current_image.image_height / fotobar.polaroidHeight);
             
             current_image.ty = current_image.plot_y = 0;
             current_image.tx = left * -1;
             
-            current_image.plot_x = Math.floor((current_image.tx * current_image.image_scale));
-            //current_image.plot_width = Math.floor((fotobar.polaroidHeight * current_image.image_scale));
-            //current_image.plot_height = current_image.image_height;
+            current_image.plot_x = Math
+            .floor((current_image.tx * current_image.image_scale));
+            // current_image.plot_width = Math.floor((fotobar.polaroidHeight *
+            // current_image.image_scale));
+            // current_image.plot_height = current_image.image_height;
             
             break;
             
@@ -305,12 +305,14 @@ FotobarUI.prototype.setPolaroidCords = function(canvas_image, imageId) {
                                                  .floor((canvas_image.height - fotobar.polaroidHeight) / 2) * -1)
             : 0;
             
-            current_image.image_scale = ( current_image.image_width / fotobar.polaroidWidth);
+            current_image.image_scale = (current_image.image_width / fotobar.polaroidWidth);
             current_image.ty = top * -1;
             current_image.tx = current_image.plot_tx = 0;
-            current_image.plot_y = Math.floor(current_image.ty * current_image.image_scale);
-            //current_image.plot_height = floor(fotobar.polaroidWidth * current_image.image_scale);
-            //current_image.plot_width = current_image.image_width;
+            current_image.plot_y = Math.floor(current_image.ty
+                                              * current_image.image_scale);
+            // current_image.plot_height = floor(fotobar.polaroidWidth *
+            // current_image.image_scale);
+            // current_image.plot_width = current_image.image_width;
             
             break;
     }
@@ -348,15 +350,18 @@ FotobarUI.prototype.initialize = function(image, is_new_order) {
         canvas_image.style.marginLeft = (fotobar.images[image.id].tx * -1)
         + 'px';
         
-        
-        //fotobar.images[image.id].plot_width = Math.floor(fotobar.images[image.id].image_width / fotobar.images[image.id].zoom);
-        //fotobar.images[image.id].plot_height = Math.floor(fotobar.images[image.id].image_height / fotobar.images[image.id].zoom);
-        fotobar.images[image.id].plot_x = Math.floor((fotobar.images[image.id].tx * fotobar.images[image.id].image_scale));
-        fotobar.images[image.id].plot_y = Math.floor((fotobar.images[image.id].ty * fotobar.images[image.id].image_scale));
+        // fotobar.images[image.id].plot_width =
+        // Math.floor(fotobar.images[image.id].image_width /
+        // fotobar.images[image.id].zoom);
+        // fotobar.images[image.id].plot_height =
+        // Math.floor(fotobar.images[image.id].image_height /
+        // fotobar.images[image.id].zoom);
+        fotobar.images[image.id].plot_x = Math.floor(fotobar.images[image.id].tx);
+        fotobar.images[image.id].plot_y = Math.floor(fotobar.images[image.id].ty);
         
     }
     
-    console.log(fotobar.images[image.id]);
+    //console.log(fotobar.images[image.id]);
     
     current_canvas.appendChild(canvas_image);
     
@@ -392,13 +397,13 @@ FotobarUI.prototype.initialize = function(image, is_new_order) {
         case (fotobar.contains([ 4 ], fotobar.images[image.id].format)):
             $(input_text).css("top", "82%");
             $(input_text).css("width", "90%");
-            $(input_text).css("margin-left", "5%");
+            $(input_text).css("margin-left", "0%");
             break;
             
         default:
             $(input_text).css("top", "85%");
             $(input_text).css("width", "90%");
-            $(input_text).css("margin-left", "1.5%");
+            $(input_text).css("margin-left", "0%");
             break;
             
     }
@@ -449,18 +454,23 @@ FotobarUI.prototype.renderEditView = function() {
                        }
                        });
     
-    $('#menu-fx div.fx').on('click', function() {
-                            
-                            $('#edit_image').removeClass(fotobarUI.current_image.effect);
-                            fotobarUI.current_image.image.effect = '';
-                            $('#edit_image').removeClass();
-                            
-                            if ($(this).attr('filter') != 'none') {
-                            
-                            fotobarUI.current_image.effect = fotobarUI.current_image.image.effect = $(this).attr('filter');
-                            $('#edit_image').addClass($(this).attr('filter'));
-                            }
-                            });
+    $('#menu-fx div.fx')
+    .on(
+        'click',
+        function() {
+        
+        $('#edit_image').removeClass(
+                                     fotobarUI.current_image.effect);
+        fotobarUI.current_image.image.effect = '';
+        $('#edit_image').removeClass();
+        
+        if ($(this).attr('filter') != 'none') {
+        
+        fotobarUI.current_image.effect = fotobarUI.current_image.image.effect = $(
+                                                                                  this).attr('filter');
+        $('#edit_image').addClass($(this).attr('filter'));
+        }
+        });
     
     // Delete
     $("#delete").on("click", function() {
@@ -531,7 +541,6 @@ FotobarUI.prototype.updateImageCoords = function(imageCords, zoom_factor) {
     
 };
 
-
 FotobarUI.prototype.renderCheckoutView = function() {
     
     var isCartValid = fotobarCart.validateCart();
@@ -550,7 +559,6 @@ FotobarUI.prototype.renderCheckoutView = function() {
     
     fotobarUI.repopForm(fotobarUI.contact_form);
     fotobarUI.repopForm(fotobarUI.cc_form);
-    
     
     $("#mobile").mask("?(999) 999-9999", {
                       placeholder : "  "
@@ -604,9 +612,8 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                           text : 'Please enter a valid zip code'
                                           });
                       } else {
-                      var tax_zip =  $(this).val().split('-')[0];
-                      var setTaxRate = fotobarCart.setTaxRate(tax_zip,
-                                                              'ship');
+                      var tax_zip = $(this).val().split('-')[0];
+                      var setTaxRate = fotobarCart.setTaxRate(tax_zip, 'ship');
                       setTaxRate.done(function() {
                                       
                                       $('#total_with_shipping_cost, #checkout_total').html(
@@ -673,9 +680,6 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                fotobarUI.redrawCurrent();
                                fotobarUI.showNextImage(null);
                                });
-    
-    
-    
     
     $("#checkout_btn").on('click', function() {
                           
@@ -746,7 +750,6 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             
                                                             default:
                                                             
-                                                            
                                                             if (pickup_options == 'ship') {
                                                             
                                                             switch ($(this).attr('name')) {
@@ -775,7 +778,8 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             break;
                                                             
                                                             case ('ship_zip'):
-                                                            if (!/^\d{5}(-\d{4})?$/.test($(this).val())) {
+                                                            if (!/^\d{5}(-\d{4})?$/.test($(this)
+                                                                                         .val())) {
                                                             hasErrors = true;
                                                             $(this).css({
                                                                         "border-color" : "red"
@@ -789,12 +793,12 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             }
                                                             });
                               
-                              var payment_radio = $("input:radio[name=payment_options]:checked").val();
+                              var payment_radio = $(
+                                                    "input:radio[name=payment_options]:checked").val();
                               
-                              if(payment_radio == 'now'){
+                              if (payment_radio == 'now') {
                               
-                              
-                              $("#cc_form > input").each(function(){
+                              $("#cc_form > input").each(function() {
                                                          
                                                          switch ($(this).attr('name')) {
                                                          
@@ -810,15 +814,16 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                          
                                                          case ('cc_number'):
                                                          
-                                                         if(!/^(?:\d){13,16}\b$/.test( $(this).val() )){
+                                                         if (!/^(?:\d){13,16}\b$/.test($(this).val())) {
                                                          
                                                          hasErrors = true;
                                                          $(this).css({
                                                                      "border-color" : "red"
                                                                      });
-                                                         }/*else{
-                                                           $(this).val( $(this).val().replace(/[ -]/g, "") )
-                                                           }*/
+                                                         }/*
+                                                           * else{ $(this).val( $(this).val().replace(/[
+                                                           * -]/g, "") ) }
+                                                           */
                                                          break;
                                                          
                                                          case ('ccv'):
@@ -896,7 +901,6 @@ FotobarUI.prototype.renderCheckoutView = function() {
         var payment_radio = $(
                               "input:radio[name=payment_options]:checked")
 								.val();
-        
         
         switch (true) {
         
@@ -1083,7 +1087,8 @@ FotobarUI.prototype.renderImageView = function() {
         var sku = $(this).parent("div.qty").attr('sku');
         var quantityUpdate = ($(this).hasClass('minus_count')) ? -1
 								: 1;
-        fotobarCart.updateQuantity(sku, quantityUpdate, fotobarUI.current_image.id);
+        fotobarCart.updateQuantity(sku, quantityUpdate,
+                                   fotobarUI.current_image.id);
         
         $("div.qty")
 								.each(
@@ -1284,7 +1289,7 @@ FotobarUI.prototype.deleteButtonClick = function() {
                                    if (fotobar.imageCount() > 0) {
                                    
                                    fotobarUI.slider_index = 0;
-                                   fotobarUI.current_image  = null;
+                                   fotobarUI.current_image = null;
                                    fotobarUI.renderImageView();
                                    fotobarUI.redrawCurrent();
                                    fotobarUI.showNextImage(null);
@@ -1292,7 +1297,7 @@ FotobarUI.prototype.deleteButtonClick = function() {
                                    } else {
                                    
                                    fotobarUI.renderImageSrcView();
-                                   fotobarUI.current_image  = null;
+                                   fotobarUI.current_image = null;
                                    fotobarUI.alertUser({
                                                        type : 'error',
                                                        text : 'You have deleted all of your pictures.'
@@ -1359,60 +1364,107 @@ FotobarUI.prototype.frameButtonClick = function(buttonId) {
  */
 FotobarUI.prototype.appendRemotePhotos = function(photos) {
     
-    $("div.photo_list").off('click');
-    
-    for (photo in photos) {
-        //var currentPhoto = photos[photo];		
-        var newImage = new Image();
-        newImage.onload = function() {
-            
-            var div = document.createElement("div");
-            div.className = 'photo_list';
-            //div.setAttribute('id', currentPhoto.id);
-            div.setAttribute('image_url', this.src);
-            
-            var img = document.createElement("img");
-            img.setAttribute('src', this.src);
-            img.className = (this.height > this.width)?'social_square_portrait':'social_square_land';
-            div.appendChild(img);
-            
-            var imgSelected = document.createElement("img");
-            imgSelected.setAttribute('src', 'assets/img/CheckMark.png');
-            imgSelected.className = 'image_check';
-            div.appendChild(imgSelected);
-            
-            $(div).on(
-                      'click',
-                      function() {
-                      
-                      if ($(this).children('img.image_check').is(':visible')) {
-                      
-                      $(this).toggleClass('image_selected');
-                      $(this).children('img.image_check').toggle();
-                      } else {
-                      
-                      var max_selections = fotobarUI.getSelectCount($(
-                                                                      "div.image_selected").size());
-                      
-                      if (max_selections > 0) {
-                      
-                      $(this).toggleClass('image_selected');
-                      $(this).children('img.image_check').toggle();
-                      }
-                      }
-                      });
-            
-            $('#photo_list').append(div);
-        }
-        newImage.src = photos[photo].url;		
-    }
+    return $
+    .Deferred(function() {
+              
+              var self = this;
+              
+              // $("div.photo_list").off('click');
+              
+              var photoArrayLength = photos.length;
+              
+              for (var i = 0; i < photoArrayLength; i++) {
+              
+              // var currentPhoto = photos[photo];
+              var newImage = new Image();
+              newImage.onload = function() {
+              
+              var div = document.createElement("div");
+              div.className = 'photo_list';
+              // div.setAttribute('id', currentPhoto.id);
+              div.setAttribute('image_url', this.src);
+              
+              var img = document.createElement("img");
+              img.setAttribute('src', this.src);
+              img.className = (this.height > this.width) ? 'social_square_portrait'
+              : 'social_square_land';
+              div.appendChild(img);
+              
+              var imgSelected = document.createElement("img");
+              imgSelected.setAttribute('src',
+                                       'assets/img/CheckMark.png');
+              imgSelected.className = 'image_check';
+              div.appendChild(imgSelected);
+              
+              $(div).on(
+                        'click',
+                        function() {
+                        
+                        if ($(this).children('img.image_check').is(
+                                                                   ':visible')) {
+                        
+                        $(this).toggleClass('image_selected');
+                        $(this).children('img.image_check')
+                        .toggle();
+                        } else {
+                        
+                        var max_selections = fotobarUI
+                        .getSelectCount($(
+                                          "div.image_selected")
+                                        .size());
+                        
+                        if (max_selections > 0) {
+                        
+                        $(this).toggleClass(
+                                            'image_selected');
+                        $(this).children('img.image_check')
+                        .toggle();
+                        }
+                        }
+                        });
+              
+              $('#photo_list').append(div);
+              
+              photos.shift();
+              if (photos.length == 0) {
+              
+              self.resolve();
+              }
+              
+              }
+              newImage.src = photos[i].url;
+              }
+              
+              });
 };
 
 FotobarUI.prototype.showRemotePhotos = function(photos) {
     
     fotobarUI.appendRemotePhotos(photos);
     
-    $('#show_more').on('click', function() {
+    switch (fotobarUI.current_social_media) {
+            
+        case ('ig'):
+            
+            if (fotobarUI.instagram.paginationUrl != null) {
+                $("#show_more").show();
+            }
+            break;
+            
+        case ('fb'):
+            
+            if (fotobarUI.faceBook.paginationUrl != null) {
+                $("#show_more").show();
+            }
+            break;
+    }
+    
+    $('#show_more').on(
+                       'click',
+                       function() {
+                       
+                       $("#pagination_loading").show();
+                       $("#show_more").hide();
                        
                        switch (fotobarUI.current_social_media) {
                        
@@ -1421,7 +1473,17 @@ FotobarUI.prototype.showRemotePhotos = function(photos) {
                        var getPagination = fotobarUI.instagram.pagination();
                        getPagination.done(function(photos) {
                                           
-                                          fotobarUI.appendRemotePhotos(photos);
+                                          var paginationDisplay = fotobarUI
+                                          .appendRemotePhotos(photos);
+                                          paginationDisplay.done(function() {
+                                                                 $("body, html").scrollTop(
+                                                                                           $("#photo_list").prop("scrollHeight"));
+                                                                 $("#pagination_loading").hide();
+                                                                 
+                                                                 if (fotobarUI.instagram.paginationUrl != null) {
+                                                                 $("#show_more").show();
+                                                                 }
+                                                                 });
                                           });
                        break;
                        
@@ -1430,7 +1492,17 @@ FotobarUI.prototype.showRemotePhotos = function(photos) {
                        var getPagination = fotobarUI.faceBook.pagination();
                        getPagination.done(function(photos) {
                                           
-                                          fotobarUI.appendRemotePhotos(photos);
+                                          var paginationDisplay = fotobarUI.appendRemotePhotos(photos);
+                                          paginationDisplay.done(function() {
+                                                                 $("body, html").scrollTop(
+                                                                                           $("#photo_list").prop("scrollHeight"));
+                                                                 $("#pagination_loading").hide();
+                                                                 
+                                                                 if (fotobarUI.faceBook.paginationUrl != null) {
+                                                                 $("#show_more").show();
+                                                                 }
+                                                                 });
+                                          
                                           });
                        break;
                        
@@ -1492,7 +1564,8 @@ FotobarUI.prototype.showRemotePhotos = function(photos) {
                                               imageCounter++;
                                               if (imageCounter == $('div.image_selected').length) {
                                               fotobarUI.current_image = null;
-                                              fotobarUI.renderImages(fotosToSelect);
+                                              fotobarUI
+                                              .renderImages(fotosToSelect);
                                               }
                                               });
                                       
@@ -1553,13 +1626,14 @@ FotobarUI.prototype.getFbAlbums = function() {
                        
                        var getAlbums = fotobarUI.faceBook
                        .getAlbums(fotobarConfig.user.facebook_userID);
-                       getAlbums.done(function(albums) {
-                                      
-                                      fotobarUI.current_social_media = 'fb';
-                                      
-                                      fotobarUI
-                                      .showRemoteAlbums(albums);
-                                      });
+                       getAlbums
+                       .done(function(albums) {
+                             
+                             fotobarUI.current_social_media = 'fb';
+                             
+                             fotobarUI
+                             .showRemoteAlbums(albums);
+                             });
                        
                        getAlbums
                        .fail(function(error) {
@@ -1604,8 +1678,6 @@ FotobarUI.prototype.getFbAlbums = function() {
     }
 };
 
-
-
 FotobarUI.prototype.showRemoteAlbums = function(albums) {
     
     $('body').html(this.albumDisplayTpl());
@@ -1627,13 +1699,23 @@ FotobarUI.prototype.showRemoteAlbums = function(albums) {
         
         var img = document.createElement("img");
         img.setAttribute('src', currentImage);
+        img.setAttribute('align', "middle");
         img.className = "social_square_album";
         
         div.appendChild(img);
         li.appendChild(div);
         
-        var span = document.createElement("span");
-        span.innerHTML = currentAlbum.name + ' - ' + albumPhoteCount;
+        var span = document.createElement("div");
+        $(span).css({
+                    'display' : 'inline-block',
+                    'white-space' : 'pre-wrap',
+                    'width' : '60%',
+                    'vertical-align' : 'middle'
+                    });
+        
+        // span.innerHTML = currentAlbum.name + ' - ' + albumPhoteCount;
+        span.innerHTML = currentAlbum.name;
+        
         li.appendChild(span);
         
         $('#photo_albums').prepend(li);
@@ -1704,6 +1786,8 @@ FotobarUI.prototype.getIgAccessToken = function() {
 
 FotobarUI.prototype.getIgImages = function() {
     
+    $("#gram_src_btn").click(false);
+    
     var getAccessToken = fotobarUI.getIgAccessToken();
     
     getAccessToken.done(function(access_key) {
@@ -1718,11 +1802,13 @@ FotobarUI.prototype.getIgImages = function() {
                         igPhotos.fail(function(err) {
                                       
                                       fotobarUI.instagram.logout();
+                                      $("#gram_src_btn").on("click", fotobarUI.getIgImages);
                                       fotobarUI.alertUser({
                                                           type : 'error',
                                                           text : 'Could not get your Instagram Photos.'
                                                           });
                                       });
+                        
                         });
     
     getAccessToken.fail(function(err) {
@@ -1912,27 +1998,34 @@ FotobarUI.prototype.displayAlert = function(error) {
     
     return $.Deferred(function() {
                       
+                      if (error.text.length < 5) {
+                      self.resolve();
+                      }
+                      
                       var self = this;
-                      var messageDiv = document.createElement('div');
+                      // var messageDiv = document.createElement('textarea');
                       var currentClass = (error.type == 'error') ? 'errorDiv' : 'succesDiv';
-                      $(messageDiv).attr('id', 'message_div');
-                      $(messageDiv).addClass(currentClass);
-                      $(messageDiv).html(error.text);
+                      // $(messageDiv).attr('id', 'message_div');
+                      // $(messageDiv).addClass(currentClass);
+                      // $(messageDiv).html(error.text);
                       
                       $('<div/>', {
                         id : 'alert_message',
                         class : currentClass,
-                        text : error.text
+                        html : error.text
                         }).prependTo('body');
                       
                       $('#alert_message').center();
-                      $(window).scroll(function() { $('#alert_message').center(); });
+                      $(window).scroll(function() {
+                                       $('#alert_message').center();
+                                       });
                       
-                      $("#alert_message").fadeOut(8000, function() {
-                                                  
-                                                  $("#alert_message").remove();
-                                                  self.resolve();
-                                                  });
+                      setTimeout(function() {
+                                 
+                                 $("#alert_message").remove();
+                                 self.resolve();
+                                 }, 5000);
+                      
                       });
 };
 
@@ -1944,7 +2037,6 @@ FotobarUI.prototype.filterTimestamp = function(timestamp) {
     
     return (image.id);
 };
-
 
 FotobarUI.prototype.setCurrentElements = function(current_id) {
     

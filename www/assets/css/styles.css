@@ -153,6 +153,11 @@ strong {
     position: relative;
 }
 
+.header-controls {
+    top:10px;
+}
+
+
 .title {
     font-size: 26px;
     left: -12.5%;

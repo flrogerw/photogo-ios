@@ -38,7 +38,7 @@
                                             
                                             <div class="slide02 slide current">
                                             
-                                            <img style="margin-top:25%" src="assets/img/icon2.png">
+                                            <img src="assets/img/iphone62x.png">
                                             
                                             </div>
                                             </div>
@@ -125,238 +125,240 @@
                                             
                                             <div id="photos_wrapper">
                                             
-                                            <div id="photo_list"></div>
+                                            <div id="photo_list">
+                                            <div id="pagination_loading">LOADING...</div>
+                                            </div>
                                             
                                             </div>
-                                            <div id="show_more">SHOW MORE</div>
+                                            <div id="show_more" style="display:none;">SHOW MORE</div>
                                             
                                             </script>
                                             
                                             
                                             <script id="thank_you" type="text/template">
-                                            
-                                            
-                                            <div class="wrapper">
-                                            <div class="checkout-success">
-                                            <div class="message">
-                                            <h1>Success!</h1>
-                                            <p id="ship-message" class="ship-message" style="display:none">Your order will ship within 3 days. You will receive an email with tracking information.</p>
-                                            <p id="pickup-message" class="pickup-message" style="display:none">We will contact you when your order is ready for pickup.</p>
-                                            <p id="pickup-message-no-pay" class="pickup-message" style="display:none">Printing will begin when you pay at the store.</p>
-                                            </div>
-                                            <div id="thankyou_address_info" style="display: none">
-                                            
-                                            <!-- h2>Address</h2 -->
-                                            <div id="location_title" >Photo & Go</div>
-                                            <div id="location_address"></div>
-                                            <div id="location_city"></div>
-                                            <div id="location_phone"></div>
-                                            <h2>Store Hours</h2>
-                                            <table id="location_hours"></table>
-                                            </div>
-                                            <div id="thankyou_social_media" class="social">
-                                            <img onclick="location.href = 'https://www.facebook.com/photoandgo'" class="facebook" src="assets/img/photos-facebook.png">
-                                            <img onclick="location.href = 'https://instagram.com/photoandgo_/'" class="instagram" src="assets/img/photos-instagram.png">
-                                            <img onclick="location.href = 'https://twitter.com/photoandgo'" class="twitter" src="assets/img/photos-twitter.png">
-                                            </div>
-                                            </div>
-                                            
-                                            
-                                            
-                                            <div class="controls-container">
-                                            <div class="controls">
-                                            <div class="spectrum-top"></div>
-                                            <div id="thank_you_back_btn" class="btn_normal btn_start"><strong>Let's do it again!</strong></div>
-                                            </div>
-                                            </div>
-                                            </div>
-                                            
-                                            </script>
+                                                
+                                                
+                                                <div class="wrapper">
+                                                <div class="checkout-success">
+                                                <div class="message">
+                                                <h1>Success!</h1>
+                                                <p id="ship-message" class="ship-message" style="display:none">Your order will ship within 3 days. You will receive an email with tracking information.</p>
+                                                <p id="pickup-message" class="pickup-message" style="display:none">We will contact you when your order is ready for pickup.</p>
+                                                <p id="pickup-message-no-pay" class="pickup-message" style="display:none">Printing will begin when you pay at the store.</p>
+                                                </div>
+                                                <div id="thankyou_address_info" style="display: none">
+                                                
+                                                <!-- h2>Address</h2 -->
+                                                <div id="location_title" >Photo & Go</div>
+                                                <div id="location_address"></div>
+                                                <div id="location_city"></div>
+                                                <div id="location_phone"></div>
+                                                <h2>Store Hours</h2>
+                                                <table id="location_hours"></table>
+                                                </div>
+                                                <div id="thankyou_social_media" class="social">
+                                                <img onclick="location.href = 'https://www.facebook.com/photoandgo'" class="facebook" src="assets/img/photos-facebook.png">
+                                                <img onclick="location.href = 'https://instagram.com/photoandgo_/'" class="instagram" src="assets/img/photos-instagram.png">
+                                                <img onclick="location.href = 'https://twitter.com/photoandgo'" class="twitter" src="assets/img/photos-twitter.png">
+                                                </div>
+                                                </div>
+                                                
+                                                
+                                                
+                                                <div class="controls-container">
+                                                <div class="controls">
+                                                <div class="spectrum-top"></div>
+                                                <div id="thank_you_back_btn" class="btn_normal btn_start"><strong>Let's do it again!</strong></div>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                
+                                                </script>
                                             
                                             
                                             
                                             
                                             
                                             <script id="album-display" type="text/template">
-                                            
-                                            <div class="wrapper">
-                                            
-                                            <div class="header-controls-container">
-                                            
-                                            <div class="header-controls">
-                                            
-                                            <div id="album_display_back_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png"> Back</div>
-                                            
-                                            <div id="title_albums" class="title">Albums</div>
-                                            
-                                            <div class="btn_cart btn_header"><!-- img src="assets/img/cart.png" --> BUY ${{ getCart}}</div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            <div class="spectrum-bottom"></div>
-                                            
-                                            </div>
-                                            
-                                            </div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            
-                                            <div id="albums_wrapper">
-                                            
-                                            <ul class="photo_albums" id="photo_albums"></ul>
-                                            
-                                            </div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            </div>
-                                            
-                                            </script>
+                                                
+                                                <div class="wrapper">
+                                                
+                                                <div class="header-controls-container">
+                                                
+                                                <div class="header-controls">
+                                                
+                                                <div id="album_display_back_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png"> Back</div>
+                                                
+                                                <div id="title_albums" class="title">Albums</div>
+                                                
+                                                <div class="btn_cart btn_header"><!-- img src="assets/img/cart.png" --> BUY ${{ getCart}}</div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                <div class="spectrum-bottom"></div>
+                                                
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                
+                                                <div id="albums_wrapper">
+                                                
+                                                <ul class="photo_albums" id="photo_albums"></ul>
+                                                
+                                                </div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                </div>
+                                                
+                                                </script>
                                             
                                             
                                             
                                             <script id="image-source" type="text/template">
-                                            
-                                            <div class="wrapper">
-                                            
-                                            <div class="header-controls-container">
-                                            
-                                            <div class="header-controls">
-                                            
-                                            <div id="image_source_back_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png"> Back</div>
-                                            
-                                            <div id="title_photos" class="title">PHOTOS</div>
-                                            
-                                            <div id="image_source_cart_btn" class="btn_cart btn_header"><!-- img src="assets/img/cart.png" --> BUY ${{ getCart}}</div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            <div class="spectrum-bottom"></div>
-                                            
-                                            </div>
-                                            
-                                            </div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            
-                                            <div class="pictures">
-                                            
-                                            <p>Get Your Photos From:</p>
-                                            
-                                            <img id="cam_src_btn" class="gallery" src="assets/img/photos-gallery.png">
-                                            
-                                            <img id="gram_src_btn" class="instagram" src="assets/img/photos-instagram.png">
-                                            
-                                            <img id="fb_src_btn" class="facebook" src="assets/img/photos-facebook.png">
-                                            
-                                            <div class="gallery">Phone</div>
-                                            
-                                            <div class="instagram">Instagram</div>
-                                            
-                                            <div class="facebook">Facebook</div>
-                                            
-                                            </div>
-                                            
-                                            <div class="logout">
-                                            <button style="display:none" id="ig_logout" class="instagram">Logout of Instagram</button>
-                                            <button style="display:none" id="fb_logout" class="facebook">Logout of Facebook</button>
-                                            </div>
-                                            </div>
-                                            </script>
+                                                
+                                                <div class="wrapper">
+                                                
+                                                <div class="header-controls-container">
+                                                
+                                                <div class="header-controls">
+                                                
+                                                <div id="image_source_back_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png"> Back</div>
+                                                
+                                                <div id="title_photos" class="title">PHOTOS</div>
+                                                
+                                                <div id="image_source_cart_btn" class="btn_cart btn_header"><!-- img src="assets/img/cart.png" --> BUY ${{ getCart}}</div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                <div class="spectrum-bottom"></div>
+                                                
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                
+                                                <div class="pictures">
+                                                
+                                                <p>Get Your Photos From:</p>
+                                                
+                                                <img id="cam_src_btn" class="gallery" src="assets/img/photos-gallery.png">
+                                                
+                                                <img id="gram_src_btn" class="instagram" src="assets/img/photos-instagram.png">
+                                                
+                                                <img id="fb_src_btn" class="facebook" src="assets/img/photos-facebook.png">
+                                                
+                                                <div class="gallery">Phone</div>
+                                                
+                                                <div class="instagram">Instagram</div>
+                                                
+                                                <div class="facebook">Facebook</div>
+                                                
+                                                </div>
+                                                
+                                                <div class="logout">
+                                                <button style="display:none" id="ig_logout" class="instagram">Logout of Instagram</button>
+                                                <button style="display:none" id="fb_logout" class="facebook">Logout of Facebook</button>
+                                                </div>
+                                                </div>
+                                                </script>
                                             
                                             
                                             <script id="image-edit" type="text/template">
-                                            
-                                            <div class="wrapper">
-                                            
-                                            <div class="header-controls-container">
-                                            
-                                            <div class="header-controls">
-                                            
-                                            <div id="edit_done_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png">Save</div>
-                                            
-                                            <div id="title_edit" class="title">EDIT</div>
-                                            
-                                            <div class="btn_cart btn_header"><!-- img src="assets/img/cart.png" --> BUY $<span id="cart_total">{{ getCart}}</span></div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            <div class="spectrum-bottom"></div>
-                                            
-                                            </div>
-                                            
-                                            </div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            
-                                            
-                                            <div class="polaroids">
-                                            
-                                            <div id="edit_panel"><img src="" id="edit_image"></div>
-                                            
-                                            </div>
-                                            
-                                            <div class="clear"></div>
-                                            <!-- div class="zoom">
-                                            <button id="zoom-in">zoom in</button>
-                                            <button id="zoom-out">zoom out</button>
-                                            </div -->
-                                            <div class="directions">Hold and drag the photo to position it.</div>
-                                            <div class="clear"></div>
-                                            
-                                            <div id="controls-container" class="controls-container polaroid-edit">
-                                            
-                                            <div class="controls">
-                                            
-                                            <div class="spectrum-top"></div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            <div id="menu-style" class="controls-menu menu-style">
-                                            
-                                            <div id="menu-format" class="menu-format">
-                                            
-                                            <div id="polaroid_button" class="format selected"><div class="format_text_spacer"><img src="assets/img/Formats-SX70.png"></div><strong>Classic</strong></div>
-                                            
-                                            <div id="full_frame_button_p" class="format"><div class="format_text_spacer"><img src="assets/img/Formats-Series80-Portrait.png"></div><strong>Vintage</strong><br/>Portait</div>
-                                            
-                                            <div id="full_frame_button_l" class="format"><div class="format_text_spacer"><img src="assets/img/Formats-Series80-Landscape.png" class="landscape"></div><strong>Vintage</strong><br/>Landscape</div>
-                                            
-                                            <div id="spectra_frame_button" class="format"><div class="format_text_spacer"><img src="assets/img/Formats-Spectra.png"></div><strong>Retro</strong></div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            </div>
-                                            
-                                            <div id="menu-fx" class="menu-fx">
-                                            
-                                            <div filter="blackwhite" class="fx BW">B&amp;W</div>
-                                            
-                                            <div filter="sepia" class="fx Sepia">Sepia</div>
-                                            
-                                            <div filter="none" class="fx None">No FX</div>
-                                            
-                                            <!-- div class="rotate"><img src="assets/img/rotate-right-90.png"></div -->
-                                            
-                                            <div id="delete" class="delete"><img src="assets/img/trash.png" ></div>
-                                            
-                                            </div>
-                                            
-                                            <div class="clear"></div>
-                                            
-                                            </div>
-                                            
-                                            </div>
-                                            
-                                            </div>
-                                            
-                                            </div>
-                                            
-                                            
-                                            </script>
+                                                
+                                                <div class="wrapper">
+                                                
+                                                <div class="header-controls-container">
+                                                
+                                                <div class="header-controls">
+                                                
+                                                <div id="edit_done_btn" class="btn_header btn_back"><img src="assets/img/btn-back.png">Save</div>
+                                                
+                                                <div id="title_edit" class="title">EDIT</div>
+                                                
+                                                <div class="btn_cart btn_header"><!-- img src="assets/img/cart.png"> BUY $<span id="cart_total">{{ getCart}}</span --></div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                <div class="spectrum-bottom"></div>
+                                                
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                
+                                                
+                                                <div class="polaroids">
+                                                
+                                                <div id="edit_panel"><img src="" id="edit_image"></div>
+                                                
+                                                </div>
+                                                
+                                                <div class="clear"></div>
+                                                <!-- div class="zoom">
+                                                <button id="zoom-in">zoom in</button>
+                                                <button id="zoom-out">zoom out</button>
+                                                </div -->
+                                                <div class="directions">Hold and drag the photo to position it.</div>
+                                                <div class="clear"></div>
+                                                
+                                                <div id="controls-container" class="controls-container polaroid-edit">
+                                                
+                                                <div class="controls">
+                                                
+                                                <div class="spectrum-top"></div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                <div id="menu-style" class="controls-menu menu-style">
+                                                
+                                                <div id="menu-format" class="menu-format">
+                                                
+                                                <div id="polaroid_button" class="format selected"><div class="format_text_spacer"><img src="assets/img/Formats-SX70.png"></div><strong>Classic</strong></div>
+                                                
+                                                <div id="full_frame_button_p" class="format"><div class="format_text_spacer"><img src="assets/img/Formats-Series80-Portrait.png"></div><strong>Vintage</strong><br/>Portait</div>
+                                                
+                                                <div id="full_frame_button_l" class="format"><div class="format_text_spacer"><img src="assets/img/Formats-Series80-Landscape.png" class="landscape"></div><strong>Vintage</strong><br/>Landscape</div>
+                                                
+                                                <div id="spectra_frame_button" class="format"><div class="format_text_spacer"><img src="assets/img/Formats-Spectra.png"></div><strong>Retro</strong></div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                </div>
+                                                
+                                                <div id="menu-fx" class="menu-fx">
+                                                
+                                                <div filter="blackwhite" class="fx BW">B&amp;W</div>
+                                                
+                                                <div filter="sepia" class="fx Sepia">Sepia</div>
+                                                
+                                                <div filter="none" class="fx None">No FX</div>
+                                                
+                                                <!-- div class="rotate"><img src="assets/img/rotate-right-90.png"></div -->
+                                                
+                                                <div id="delete" class="delete"><img src="assets/img/trash.png" ></div>
+                                                
+                                                </div>
+                                                
+                                                <div class="clear"></div>
+                                                
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                                
+                                                </script>
                                             
                                             
                                             <script id="image-preview" type="text/template">	
@@ -583,7 +585,7 @@
                                                 <form id="cc_form" name="cc_form">
                                                 <input tabindex="1" class="creditcard"
                                                 placeholder="Credit Card Number" data-stripe="number"
-                                                value="" type="text" name="cc_number"/> <input tabindex="2"
+                                                value="" type="tel" name="cc_number"/> <input tabindex="2"
                                                 class="ccv" placeholder="CVV" data-stripe="cvc" value="" size=3
                                                 type="tel" name="ccv"/> <input name="cc_exp_month" tabindex="3" class="mm" placeholder="MM"
                                                 data-stripe="exp-month" value="" size=2 type="tel" /> <input
@@ -643,6 +645,7 @@
                                             <script type="text/javascript" src="js/index.js"></script>
                                             <script type="text/javascript" src="libs/jquery.ui.js"></script>
                                             <script type="text/javascript" src="libs/FacebookConnectPlugin.js"></script>
+                                            <script type="text/javascript" src="libs/jquery.exif.js"></script>
                                             
                                             </body>
                                             

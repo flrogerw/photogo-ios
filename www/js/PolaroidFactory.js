@@ -30,4 +30,7 @@ var Polaroid = function(image) {
     this.location_url;
     this.is_remote = true;
     this.timestamp;
+    this.orientation = image.orientation;
+
+    
 };

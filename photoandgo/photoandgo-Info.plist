@@ -67,16 +67,16 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>fb535521996587090</string>
+          <string>fb1633834240233192</string>
         </array>
       </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>0.0.1</string>
     <key>FacebookAppID</key>
-    <string>535521996587090</string>
+    <string>1633834240233192</string>
     <key>FacebookDisplayName</key>
-    <string>GoPrints by Photo &amp; Go</string>
+    <string>Photo &amp; Go</string>
     <key>LSApplicationCategoryType</key>
     <string></string>
     <key>LSApplicationQueriesSchemes</key>

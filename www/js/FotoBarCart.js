@@ -227,10 +227,10 @@ FotobarCart.prototype.uploadImages = function(customer_form, itemIterator) {
                                  fotobarUI.updateCheckoutProgress(100, 2);
                                  setTimeout(function() {
                                             fotobarUI.renderThankyouView();
-                                           // fotobarUI.alertUser({
-                                                             //   type : 'success',
-                                                              //  text : 'Your order is complete.'
-                                                             //   });
+                                            fotobarUI.alertUser({
+                                                                type : 'success',
+                                                                text : 'Your order is complete.'
+                                                                });
                                             }, 1000);
                                  });
                   
@@ -290,6 +290,7 @@ FotobarCart.prototype.processOrder = function(customer_form, cc_form) {
                                
                                var getCharge = payment.postStripeCharge(cc_form, order_data);
                                getCharge.done(function(data) {
+                                              
                                               var stripeCharge = JSON.parse(data);
                                               customer_form.stripe_token = stripeCharge.message
                                               fotobarUI.updateCheckoutProgress(25, 0);
@@ -496,7 +497,7 @@ FotobarCart.prototype.validateCart = function() {
              var totalItemCount = fotobarCart.getTotalItemCount();
              // var text = product.name + " requires a minimum of
              // "+product.minQty+" total to checkout. ";
-             var text = "Order does not meet minimum total of 6 Original size or 1 Medium/Large.";
+             var text = "Order does not meet minimum total of<br>6 Original size or 1 Medium/Large.";
              
              if (itemCount < product.minQty) {
              
