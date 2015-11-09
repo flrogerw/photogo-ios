@@ -227,10 +227,10 @@ FotobarCart.prototype.uploadImages = function(customer_form, itemIterator) {
                                  fotobarUI.updateCheckoutProgress(100, 2);
                                  setTimeout(function() {
                                             fotobarUI.renderThankyouView();
-                                            fotobarUI.alertUser({
-                                                                type : 'success',
-                                                                text : 'Your order is complete.'
-                                                                });
+                                            //fotobarUI.alertUser({
+                                                              //  type : 'success',
+                                                               // text : 'Your order is complete.'
+                                                               // });
                                             }, 1000);
                                  });
                   

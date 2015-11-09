@@ -32,10 +32,11 @@ FotobarFacebook.prototype.pagination = function() {
 	return $.Deferred(function() {
 
 		var self = this;
+                      
 		
-            fotobarUI.faceBook.FBplugin.graphCall( fotobarUI.faceBook.paginationUrl, {}, "GET", function(photos) {
+                      fotobarUI.faceBook.FBplugin.graphCall( "10207025248819494", {"fields":"photos{id, source}"}, "GET", function(resp) {
 
-                                                            console.log(photos);
+                                                            console.log(resp.photos);
                                                             
 			var igImages = [];
 			

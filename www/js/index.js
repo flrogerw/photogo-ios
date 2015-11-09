@@ -1,5 +1,7 @@
 (function($) {
 
+ $.mobile.autoInitializePage = false;
+ 
 	$("body").on(
 			'keydown',
 			function(e) {
@@ -67,7 +69,7 @@ $(document).ready(
 				screen.lockOrientation('portrait');
 				FastClick.attach(document.body);
                                       
-                                      var plugin = new CC.CordovaFacebook();
+                //var plugin = new CC.CordovaFacebook();
 
 				if (navigator.notification) {
 
@@ -94,9 +96,7 @@ $(document).ready(
 					fotobarUI = new FotobarUI();
 					//green_fade.promise().done(function() {
                                  
-                                 console.log('THERE');
-						
-						fotobarUI.renderHomeView();
+                        fotobarUI.renderHomeView();
                         fotobarUI.alertUser(fotobarConfig.errors.display);
                                 
 /*

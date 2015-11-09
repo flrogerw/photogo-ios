@@ -55,6 +55,10 @@
     <feature name="CordovaFacebook">
         <param name="ios-package" value="CordovaFacebook" />
     </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <name>photoandgo</name>
@@ -73,5 +77,4 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="BackupWebStorage" value="local" />
-    <preference name="AutoHideSplashScreen" value="true" />
 </widget>

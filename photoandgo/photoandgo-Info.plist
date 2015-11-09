@@ -257,8 +257,6 @@
         <string>{768, 1024}</string>
       </dict>
     </array>
-    <key>UILaunchStoryboardName</key>
-    <string>PhotoGo</string>
     <key>UIRequiresFullScreen</key>
     <false/>
     <key>UIStatusBarHidden</key>

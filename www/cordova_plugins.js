@@ -246,6 +246,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
         "file": "plugins/com.verso.cordova.clipboard/www/clipboard.js",
         "id": "com.verso.cordova.clipboard.Clipboard",
         "clobbers": [
@@ -269,6 +276,7 @@ module.exports.metadata =
     "cordova-instagram-plugin": "0.5.2",
     "com.bez4pieci.cookies": "0.0.1",
     "com.ccsoft.plugin.CordovaFacebook": "1.1.0",
+    "cordova-plugin-splashscreen": "2.1.0",
     "com.verso.cordova.clipboard": "0.1.0"
 }
 // BOTTOM OF METADATA

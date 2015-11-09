@@ -2003,11 +2003,8 @@ FotobarUI.prototype.displayAlert = function(error) {
                       }
                       
                       var self = this;
-                      // var messageDiv = document.createElement('textarea');
+                      
                       var currentClass = (error.type == 'error') ? 'errorDiv' : 'succesDiv';
-                      // $(messageDiv).attr('id', 'message_div');
-                      // $(messageDiv).addClass(currentClass);
-                      // $(messageDiv).html(error.text);
                       
                       $('<div/>', {
                         id : 'alert_message',
