@@ -44,6 +44,7 @@
 		AE1350A51BF02DB800D7424D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE1350A41BF02DB800D7424D /* Default@2x.png */; };
 		AE427E841BF56131005491BA /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = AE427E831BF56131005491BA /* icon-72.png */; };
 		AE427E861BF5614D005491BA /* icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE427E851BF5614D005491BA /* icon-72@2x.png */; };
+		AE427E881BF56163005491BA /* icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = AE427E871BF56163005491BA /* icon-76.png */; };
 		AE9A49E01BCA16D50069DE46 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9A49DF1BCA16D50069DE46 /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		AEAD23761BF55F9700BC8EB5 /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD23751BF55F9700BC8EB5 /* icon-40.png */; };
 		AEAD23781BF55FBA00BC8EB5 /* icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD23771BF55FBA00BC8EB5 /* icon-50.png */; };
@@ -154,6 +155,7 @@
 		AE1350A41BF02DB800D7424D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		AE427E831BF56131005491BA /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
 		AE427E851BF5614D005491BA /* icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72@2x.png"; sourceTree = "<group>"; };
+		AE427E871BF56163005491BA /* icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-76.png"; sourceTree = "<group>"; };
 		AE9A49DF1BCA16D50069DE46 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		AEAD23751BF55F9700BC8EB5 /* icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40.png"; sourceTree = "<group>"; };
 		AEAD23771BF55FBA00BC8EB5 /* icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-50.png"; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 		308D052D1370CCF300D202BF /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				AE427E871BF56163005491BA /* icon-76.png */,
 				AE427E851BF5614D005491BA /* icon-72@2x.png */,
 				AE427E831BF56131005491BA /* icon-72.png */,
 				AEAD23791BF55FEA00BC8EB5 /* icon-60.png */,
@@ -462,6 +465,7 @@
 				CBF2B6F9D10E49BC895FF040 /* ELCAssetTablePicker.xib in Resources */,
 				AE13509F1BF02DA200D7424D /* Default-Portrait-736h@3x.png in Resources */,
 				AE13509D1BF02D9900D7424D /* Default-Landscape@2x.png in Resources */,
+				AE427E881BF56163005491BA /* icon-76.png in Resources */,
 				AEAD237A1BF55FEA00BC8EB5 /* icon-60.png in Resources */,
 				157CA4ED00C04E048ADE6DCD /* Overlay.png in Resources */,
 				70A381543D074ECEAAFC5570 /* Overlay@2x.png in Resources */,
