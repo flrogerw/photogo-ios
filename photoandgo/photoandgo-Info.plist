@@ -51,7 +51,7 @@
       </dict>
     </dict>
     <key>CFBundleIdentifier</key>
-    <string>com.fotogo.simple</string>
+    <string>com.photostogo.mobile</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
