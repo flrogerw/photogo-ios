@@ -45,6 +45,7 @@
 		AE9A49E01BCA16D50069DE46 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9A49DF1BCA16D50069DE46 /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		AEAD23761BF55F9700BC8EB5 /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD23751BF55F9700BC8EB5 /* icon-40.png */; };
 		AEAD23781BF55FBA00BC8EB5 /* icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD23771BF55FBA00BC8EB5 /* icon-50.png */; };
+		AEAD237A1BF55FEA00BC8EB5 /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD23791BF55FEA00BC8EB5 /* icon-60.png */; };
 		BF4185833D2948E6B8E88F6C /* CDVCookies.m in Sources */ = {isa = PBXBuildFile; fileRef = E43B69B63F7B43DFAADC1685 /* CDVCookies.m */; };
 		C00A8530841A4E049DB48DEB /* SOSPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 229E7F34467F4608BCCB1012 /* SOSPicker.m */; };
 		C750A2FE70C54B7A8E801870 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 334C6A7AC9DB49AEB5B90428 /* CDVLogger.m */; };
@@ -152,6 +153,7 @@
 		AE9A49DF1BCA16D50069DE46 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		AEAD23751BF55F9700BC8EB5 /* icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40.png"; sourceTree = "<group>"; };
 		AEAD23771BF55FBA00BC8EB5 /* icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-50.png"; sourceTree = "<group>"; };
+		AEAD23791BF55FEA00BC8EB5 /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
 		B97E7B9419B84B6C9079E2DB /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ELCAssetTablePicker.m; path = com.synconset.imagepicker/ELCAssetTablePicker.m; sourceTree = "<group>"; };
 		BC365931545D4C17B038E778 /* CDVInstagramPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVInstagramPlugin.m; path = "cordova-instagram-plugin/CDVInstagramPlugin/CDVInstagramPlugin.m"; sourceTree = "<group>"; };
 		D7551F2EEF1F464F93F18133 /* CDVDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 		308D052D1370CCF300D202BF /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				AEAD23791BF55FEA00BC8EB5 /* icon-60.png */,
 				AEAD23771BF55FBA00BC8EB5 /* icon-50.png */,
 				AEAD23751BF55F9700BC8EB5 /* icon-40.png */,
 			);
@@ -451,6 +454,7 @@
 				CBF2B6F9D10E49BC895FF040 /* ELCAssetTablePicker.xib in Resources */,
 				AE13509F1BF02DA200D7424D /* Default-Portrait-736h@3x.png in Resources */,
 				AE13509D1BF02D9900D7424D /* Default-Landscape@2x.png in Resources */,
+				AEAD237A1BF55FEA00BC8EB5 /* icon-60.png in Resources */,
 				157CA4ED00C04E048ADE6DCD /* Overlay.png in Resources */,
 				70A381543D074ECEAAFC5570 /* Overlay@2x.png in Resources */,
 				AE1350991BF02D8C00D7424D /* Default-Landscape-736h@3x.png in Resources */,
