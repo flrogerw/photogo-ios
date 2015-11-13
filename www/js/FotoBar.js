@@ -178,7 +178,7 @@ Fotobar.prototype.factory = function(imageArray) {
                                    fotobar.setImageParams(fotobar.images[that.id]);
                                    
                                    var imageURIs = imageArray.shift();
-                                   fotobar.images[that.id].image.org_uri = imageURIs[0];
+                                   fotobar.images[that.id].image.org_uri = that.src;
                                    
                                    fotobarCart.updateQuantity(fotobarUI.defaultSku, 1, that.id);
                                    
