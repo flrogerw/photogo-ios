@@ -50,6 +50,8 @@
 		AE427E8E1BF561A1005491BA /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = AE427E8D1BF561A1005491BA /* icon-small.png */; };
 		AE427E901BF561B6005491BA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE427E8F1BF561B6005491BA /* icon.png */; };
 		AE427E921BF561BE005491BA /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE427E911BF561BE005491BA /* icon@2x.png */; };
+		AE427E941BF561D2005491BA /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = AE427E931BF561D2005491BA /* iTunesArtwork.png */; };
+		AE427E961BF561DE005491BA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE427E951BF561DE005491BA /* iTunesArtwork@2x.png */; };
 		AE9A49E01BCA16D50069DE46 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9A49DF1BCA16D50069DE46 /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		AEAD23761BF55F9700BC8EB5 /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD23751BF55F9700BC8EB5 /* icon-40.png */; };
 		AEAD23781BF55FBA00BC8EB5 /* icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD23771BF55FBA00BC8EB5 /* icon-50.png */; };
@@ -166,6 +168,8 @@
 		AE427E8D1BF561A1005491BA /* icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small.png"; sourceTree = "<group>"; };
 		AE427E8F1BF561B6005491BA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		AE427E911BF561BE005491BA /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		AE427E931BF561D2005491BA /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		AE427E951BF561DE005491BA /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		AE9A49DF1BCA16D50069DE46 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		AEAD23751BF55F9700BC8EB5 /* icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40.png"; sourceTree = "<group>"; };
 		AEAD23771BF55FBA00BC8EB5 /* icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-50.png"; sourceTree = "<group>"; };
@@ -344,6 +348,8 @@
 		308D052D1370CCF300D202BF /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				AE427E951BF561DE005491BA /* iTunesArtwork@2x.png */,
+				AE427E931BF561D2005491BA /* iTunesArtwork.png */,
 				AE427E911BF561BE005491BA /* icon@2x.png */,
 				AE427E8F1BF561B6005491BA /* icon.png */,
 				AE427E8D1BF561A1005491BA /* icon-small.png */,
@@ -473,6 +479,7 @@
 				AC2C21EF91A14C7A93CA223A /* CDVNotification.bundle in Resources */,
 				AE427E841BF56131005491BA /* icon-72.png in Resources */,
 				AE427E8E1BF561A1005491BA /* icon-small.png in Resources */,
+				AE427E941BF561D2005491BA /* iTunesArtwork.png in Resources */,
 				AE1350A51BF02DB800D7424D /* Default@2x.png in Resources */,
 				9CA445AD24454693AE1EB723 /* ELCAlbumPickerController.xib in Resources */,
 				AEAD23761BF55F9700BC8EB5 /* icon-40.png in Resources */,
@@ -481,6 +488,7 @@
 				AE427E8A1BF56186005491BA /* icon-Small-50.png in Resources */,
 				AE1350971BF02D8200D7424D /* Default-667h@2x.png in Resources */,
 				AEAD23781BF55FBA00BC8EB5 /* icon-50.png in Resources */,
+				AE427E961BF561DE005491BA /* iTunesArtwork@2x.png in Resources */,
 				CBF2B6F9D10E49BC895FF040 /* ELCAssetTablePicker.xib in Resources */,
 				AE13509F1BF02DA200D7424D /* Default-Portrait-736h@3x.png in Resources */,
 				AE13509D1BF02D9900D7424D /* Default-Landscape@2x.png in Resources */,
