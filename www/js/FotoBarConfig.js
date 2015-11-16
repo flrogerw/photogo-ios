@@ -131,7 +131,7 @@ FotobarConfig.prototype.initialize = function() {
                                       
                                       fotobarConfig.errors.archive = JSON.stringify(e);
                                       fotobarConfig.updateArchive();
-                                      //fotobarConfig.errors.display.push({type : 'error',text : 'Could not read Settings file'});
+                                      fotobarConfig.errors.display.push({type : 'error',text : 'Could not read Settings file'});
                                       });
                       
                       initReader.always(function() {
@@ -141,10 +141,10 @@ FotobarConfig.prototype.initialize = function() {
                                         
                                         var getUser = fotobarConfig.getUser();
                                         getUser.done(function(user) {
-                                                     
+                                                    
                                                      var getLocations = fotobarConfig.getLocations();
                                                      getLocations.done(function(locations) {
-                                                                       
+                                                           
                                                                        var getProducts = fotobarConfig.getProducts();
                                                                        getProducts.done(function(products) {
                                                                                         

@@ -2,8 +2,8 @@ var FotobarFacebook = function() {
 
 	this.loginStatus;
 	this.paginationUrl;
-    this.FBplugin = new CC.CordovaFacebook();
     
+    this.FBplugin = new CC.CordovaFacebook();
     
     this.FBplugin.init('1633834240233192', 'Photo & Go',
                 ["user_photos"],
@@ -20,6 +20,7 @@ var FotobarFacebook = function() {
                             fotobarUI.alertUser({type:'error', text:'Could not connect to Facebook.'});
                        });
     
+    
 };
 
 FotobarFacebook.prototype.failureCallback = function(response) {
@@ -32,11 +33,11 @@ FotobarFacebook.prototype.pagination = function() {
 	return $.Deferred(function() {
 
 		var self = this;
-                      
+                      fotobarUI.faceBook.getAlbumPhotos(10207025248819494);
 		
-                      fotobarUI.faceBook.FBplugin.graphCall( "10207025248819494", {"fields":"photos{id, source}"}, "GET", function(resp) {
+        fotobarUI.faceBook.FBplugin.graphCall( "10207025248819494/photos?access_token=CAAXN9q2CzugBAHzAyzQdnoZBFkTqWx66RMrhqU8quz6cjK3u0gd929Y6U2PGjZCGH3VZC5wPZCxis5FhHZAX5gTaizwujKixzZB0ldHN6O6QwBxSphRT0v4vBimGGkZConV0CiS8TIHGmAa2QpF52i5QhecC1K06JaYF4e25PRZC935FTg7BSdsPnCdb47YlEWzh2C70qolZAfgV8o0SiBlVMOhkUBp5yWy8ZD&pretty=1&fields=source&limit=15&before=MTAyMDc4MDczOTc2MTI3MjUZD", {}, "GET",function(photos) {
 
-                                                            console.log(resp.photos);
+                                                            console.log(photos);
                                                             
 			var igImages = [];
 			
@@ -124,9 +125,9 @@ FotobarFacebook.prototype.getAlbumPhotos = function(album_id) {
                    
                    // facebookConnectPlugin.api("/" + album_id + "/photos?limit="+fotobarUI.photo_limit+"&fields=source", null, function(photos) {
     
-        fotobarUI.faceBook.FBplugin.graphCall(album_id + "/photos?limit="+fotobarUI.photo_limit+"&fields=source", {}, "GET", function(photos) {
+        fotobarUI.faceBook.FBplugin.graphCall("10207025248819494/photos?access_token=CAAXN9q2CzugBAHzAyzQdnoZBFkTqWx66RMrhqU8quz6cjK3u0gd929Y6U2PGjZCGH3VZC5wPZCxis5FhHZAX5gTaizwujKixzZB0ldHN6O6QwBxSphRT0v4vBimGGkZConV0CiS8TIHGmAa2QpF52i5QhecC1K06JaYF4e25PRZC935FTg7BSdsPnCdb47YlEWzh2C70qolZAfgV8o0SiBlVMOhkUBp5yWy8ZD&fields=source&limit=15&after=MTAyMDc4MDczOTQ4MTI2NTUZD", {}, "GET", function(photos) {
                                               
-                                              //console.log(JSON.stringify(resp));
+                                              console.log(JSON.stringify(photos));
 			
 			fotobarUI.faceBook.paginationUrl = (photos.paging.next == null )? null:photos.paging.next.replace(/^.*\/\/[^\/]+/, '');
 			if( photos.paging.next == null ){

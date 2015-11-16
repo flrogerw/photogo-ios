@@ -85,10 +85,8 @@ $(document).ready(
 				fotobar = new Fotobar();
 				fotobarConfig = new FotobarConfig();
 				var configReady = fotobarConfig.initialize();
+                                      
 				configReady.done(function() {
-                       
-                                 
-                                
                                  
 					fotobarCart = new FotobarCart(
 							fotobarConfig.configure.products);
