@@ -57,7 +57,7 @@ $(document).ready(
                   
 			
 			document.addEventListener('deviceready', function() {
-                                     
+               
 				//navigator.app.clearCache();
 				cordova.exec.setJsToNativeBridgeMode(cordova.exec.jsToNativeModes.XHR_NO_PAYLOAD);
 				$('body').show();
@@ -68,7 +68,6 @@ $(document).ready(
 
 				screen.lockOrientation('portrait');
 				FastClick.attach(document.body);
-                                      
                 //var plugin = new CC.CordovaFacebook();
 
 				if (navigator.notification) {
@@ -82,6 +81,7 @@ $(document).ready(
 					};
 				}
 
+                                      
 				fotobar = new Fotobar();
 				fotobarConfig = new FotobarConfig();
 				var configReady = fotobarConfig.initialize();
@@ -90,10 +90,10 @@ $(document).ready(
                                  
 					fotobarCart = new FotobarCart(
 							fotobarConfig.configure.products);
-                                
+
 					fotobarUI = new FotobarUI();
 					//green_fade.promise().done(function() {
-                                 
+
                         fotobarUI.renderHomeView();
                         fotobarUI.alertUser(fotobarConfig.errors.display);
                                 

@@ -287,8 +287,7 @@ FotobarUI.prototype.setPolaroidCords = function(canvas_image, imageId) {
             current_image.ty = current_image.plot_y = 0;
             current_image.tx = left * -1;
             
-            current_image.plot_x = Math
-            .floor((current_image.tx * current_image.image_scale));
+            current_image.plot_x = Math.floor((current_image.tx * current_image.image_scale));
             // current_image.plot_width = Math.floor((fotobar.polaroidHeight *
             // current_image.image_scale));
             // current_image.plot_height = current_image.image_height;
@@ -410,7 +409,11 @@ FotobarUI.prototype.initialize = function(image, is_new_order) {
     
     $(input_text).attr('maxlength', fotobarUI.max_text_length);
     $(input_text).val(fotobar.images[image.id].text);
-    // $(input_text).prop('disabled', true);
+    
+   	$(input_text).on('tap',function(){
+                     
+                     $(this).focus();
+                     });
     
 };
 
@@ -804,7 +807,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                          
                                                          case ('cc_exp_year'):
                                                          
-                                                         if (!/^20\d{2}$/.test($(this).val())) {
+                                                         if (!/^\d{2}$/.test($(this).val())) {
                                                          hasErrors = true;
                                                          $(this).css({
                                                                      "border-color" : "red"

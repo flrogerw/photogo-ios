@@ -41,7 +41,7 @@ FotobarInstagram.prototype.login = function() {
                                         break;
                                         
                                         case (error != null):
-                                        case (responceCount > 5): // closes window in case of 404
+                                        case (responceCount > 10): // closes window in case of 404
                                         
                                         loginWindow.close();
                                         self.reject(error);

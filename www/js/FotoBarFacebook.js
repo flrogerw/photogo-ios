@@ -29,15 +29,17 @@ FotobarFacebook.prototype.failureCallback = function(response) {
 
 
 FotobarFacebook.prototype.pagination = function() {
-	
-	return $.Deferred(function() {
+
+
+    
+    
+    return $.Deferred(function() {
 
 		var self = this;
-                      fotobarUI.faceBook.getAlbumPhotos(10207025248819494);
 		
-        fotobarUI.faceBook.FBplugin.graphCall( "10207025248819494/photos?access_token=CAAXN9q2CzugBAHzAyzQdnoZBFkTqWx66RMrhqU8quz6cjK3u0gd929Y6U2PGjZCGH3VZC5wPZCxis5FhHZAX5gTaizwujKixzZB0ldHN6O6QwBxSphRT0v4vBimGGkZConV0CiS8TIHGmAa2QpF52i5QhecC1K06JaYF4e25PRZC935FTg7BSdsPnCdb47YlEWzh2C70qolZAfgV8o0SiBlVMOhkUBp5yWy8ZD&pretty=1&fields=source&limit=15&before=MTAyMDc4MDczOTc2MTI3MjUZD", {}, "GET",function(photos) {
+        fotobarUI.faceBook.FBplugin.graphCall( fotobarUI.faceBook.paginationUrl, {}, "GET",function(photos) {
 
-                                                            console.log(photos);
+                                                            console.log(JSON.stringify(photos));
                                                             
 			var igImages = [];
 			
@@ -51,15 +53,15 @@ FotobarFacebook.prototype.pagination = function() {
 				$('#show_more').hide();
 			}
 			
-			for (count in photos.data) {
-
-				imageData = {
-					id : photos.data[count].id,
-					url : photos.data[count].images[0].source
-				}
-
-				igImages.push(imageData);
-			}
+                                              for (count in photos.data) {
+                                              
+                                              imageData = {
+                                              id : photos.data[count].id,
+                                              url : photos.data[count].source
+                                              }
+                                              
+                                              igImages.push(imageData);
+                                              }
 
 			self.resolve(igImages);
 		}, function(error) {
@@ -67,6 +69,7 @@ FotobarFacebook.prototype.pagination = function() {
 			self.reject(error);
 		});
 	});
+    
 };
 
 
@@ -125,11 +128,25 @@ FotobarFacebook.prototype.getAlbumPhotos = function(album_id) {
                    
                    // facebookConnectPlugin.api("/" + album_id + "/photos?limit="+fotobarUI.photo_limit+"&fields=source", null, function(photos) {
     
-        fotobarUI.faceBook.FBplugin.graphCall("10207025248819494/photos?access_token=CAAXN9q2CzugBAHzAyzQdnoZBFkTqWx66RMrhqU8quz6cjK3u0gd929Y6U2PGjZCGH3VZC5wPZCxis5FhHZAX5gTaizwujKixzZB0ldHN6O6QwBxSphRT0v4vBimGGkZConV0CiS8TIHGmAa2QpF52i5QhecC1K06JaYF4e25PRZC935FTg7BSdsPnCdb47YlEWzh2C70qolZAfgV8o0SiBlVMOhkUBp5yWy8ZD&fields=source&limit=15&after=MTAyMDc4MDczOTQ4MTI2NTUZD", {}, "GET", function(photos) {
+                      var fbGraphURL = (album_id == 'next')? fotobarUI.faceBook.paginationUrl: album_id + "/photos?limit="+fotobarUI.photo_limit+"&fields=source";
+                      
+                      
+                      
+                      fotobarUI.faceBook.FBplugin.graphCall( fbGraphURL, {}, "GET", function(photos) {
                                               
-                                              console.log(JSON.stringify(photos));
-			
-			fotobarUI.faceBook.paginationUrl = (photos.paging.next == null )? null:photos.paging.next.replace(/^.*\/\/[^\/]+/, '');
+                                              //console.log(JSON.stringify(photos));
+                                                            
+                                                            if(photos.paging.next == null){
+                                                                fotobarUI.faceBook.paginationUrl = null;
+                                                            }else{
+                                                                var urlSplit = photos.paging.next.replace(/^.*\/\/[^\/]+/, '').split('/');
+                                                                urlSplit.shift();
+                                                                urlSplit.shift();
+                                                                fotobarUI.faceBook.paginationUrl = urlSplit.join( '/' );
+                                                            console.log(fotobarUI.faceBook.paginationUrl);
+                                                            }
+                                                            
+                                                            
 			if( photos.paging.next == null ){
 				$('#show_more').hide();
 			}
