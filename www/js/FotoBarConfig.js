@@ -10,8 +10,7 @@ var FotobarConfig = function() {
     //this.stripe_pk = 'pk_test_gj1pPepZi2KqMUl8wtHB8YZE';
     
     
-    //this.stripe_pk = ( this.is_debug === true )? 'pk_test_nSZz2pA51q7nF3nP0oxTXN0g': 'pk_live_wePip2ZEAbuzTeRPqIheTrDO';// mine = live
-    this.stripe_pk = ( this.is_debug === true )? 'pk_test_nSZz2pA51q7nF3nP0oxTXN0g': 'pk_test_gj1pPepZi2KqMUl8wtHB8YZE';// mine = live
+    this.stripe_pk = ( this.is_debug === true )? 'pk_test_nSZz2pA51q7nF3nP0oxTXN0g': 'pk_live_wePip2ZEAbuzTeRPqIheTrDO';// mine = live
     this.stripe_script_url = 'https://js.stripe.com/v2/';
     this.products;
     this.server_alive = false;
