@@ -153,8 +153,6 @@ Fotobar.prototype.factory = function(imageArray) {
                       
                       getExif.done(function(exif){
                                    
-                                   console.log(exif);
-                                   
                                    that.tmpImage = {};
                                    that.id = that.tmpImage.id = fotobar.getRandom();
                                    that.tmpImage.src = that.src;

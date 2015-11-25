@@ -11,10 +11,9 @@ var FotobarFacebook = function() {
                        
                        if(response) {
                        
-                       //fotobarConfig.setUserParam('facebook_userID',response.userID);
                        fotobarConfig.setUserParam('facebook_accessToken',response.accessToken);
                        fotobarUI.FbLoginStatus = 'connected';
-                       console.log('Facebook Init');
+                       //console.log('Facebook Init');
                        }
                        }, function(error){
                        fotobarUI.alertUser({type:'error', text:'Could not connect to Facebook.'});
@@ -129,7 +128,6 @@ FotobarFacebook.prototype.getAlbumPhotos = function(album_id) {
                                                             
                                                             self.resolve(igImages);
                                                             }, function(error) {
-                                                            console.log(error);
                                                             self.reject(error);
                                                             });
                       });

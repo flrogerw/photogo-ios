@@ -11,8 +11,6 @@ FotoSelect.prototype.getImages = function(fotoselect, max_selections) {
 		var self = this;
 
 		window.imagePicker.getPictures(function(results) {
-                                       
-                                       console.log('HERE');
 
 			if (results.length == 0) {
 				self.reject();
@@ -20,8 +18,6 @@ FotoSelect.prototype.getImages = function(fotoselect, max_selections) {
                                        
 
 			for (var i = 0; i < results.length; i++) {
-
-                                       console.log(results[i]);
                                        
 				var imageURIs = results[i];
 				fotoselect.images.push(imageURIs);
