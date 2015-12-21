@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../www/js/FotoBarUI.js"
-            timestampString = "468697689.149226"
+            timestampString = "472367519.84861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2005"
-            endingLineNumber = "2005"
-            landmarkName = "FotobarUI.prototype.displayAlert"
+            startingLineNumber = "2006"
+            endingLineNumber = "2006"
+            landmarkName = "FotobarUI.prototype.initialize"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

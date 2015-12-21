@@ -71,8 +71,7 @@ Fotobar.prototype.getRemoteImage = function(remote_url) {
                       var self = this;
                       var writer = new FotobarFileWriter();
                       var download_link = encodeURI(remote_url);
-                      var filename = remote_url.split('/').pop().split(/[?#]/)[0];// .replace(/\.[^/.]+$/,
-                      // "");
+                      var filename = remote_url.split('/').pop().split(/[?#]/)[0].replace(/[^a-z0-9]/gi, "_");
                       
                       var getFileSystem = writer.getDownloadDir(fotobarConfig.root_directory
                                                                 + '/cache');
@@ -161,10 +160,12 @@ Fotobar.prototype.factory = function(imageArray) {
                                    that.tmpImage.height = exif.height;
                                    that.tmpImage.orientation = exif.orientation;
                                    
-                                   that.tmpImage.name = that.src.split('/').pop().split(/[?#]/)[0]
-                                   .replace(/\.[^/.]+$/, "");
+                                   that.tmpImage.name = that.src.split('/').pop().split(/[?#]/)[0].replace(/[^a-z0-9]/gi, "_");
                                    that.tmpImage.name = that.tmpImage.id + '_'
-                                   + that.tmpImage.name + '.' + fotobar.ouput_file_type;
+                                   + that.tmpImage.name + '.' + that.tmpImage.name.substr(that.tmpImage.name.lastIndexOf('_') + 1);
+                                   
+                                   
+                                   
                                    fotobar.images[that.id] = new Polaroid(that.tmpImage);
                                    
                                    fotobar.images[that.id].is_landscape = exif.is_landscape;

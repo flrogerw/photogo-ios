@@ -199,10 +199,12 @@ FotobarUI.prototype.addGestures = function(current_canvas) {
 
 FotobarUI.prototype.renderImages = function(imageArray) {
     
+    fotobarUI.renderImageView();
     $.when(fotobar.factory(imageArray)).done(function() {
                                              
-                                             fotobarUI.renderImageView();
+                                             //fotobarUI.renderImageView();
                                              fotobarUI.redrawCurrent();
+                                             $(".preview_overlay").css('opacity', 0);
                                              fotobarUI.showNextImage(null);
                                              });
 };
@@ -217,14 +219,15 @@ FotobarUI.prototype.getImages = function() {
         $.when(fotoselect.getImages(fotoselect, max_selections)).done(
                                                                       function() {
                                                                       
-                                                                      $.when(fotobar.factory(fotoselect.images)).done(function() {
+                $.when(fotobar.factory(fotoselect.images)).done(function() {
                                                                                                                       
-                                                                                                                      fotobarUI.renderImageView();
-                                                                                                                      fotobarUI.redrawCurrent();
-                                                                                                                      fotobarUI.current_image = null
-                                                                                                                      fotobarUI.showNextImage(null);
-                                                                                                                      });
-                                                                      }).fail(function() {
+                    fotobarUI.renderImageView();
+                    fotobarUI.redrawCurrent();
+                    $(".preview_overlay").css('opacity', 0);
+                    fotobarUI.current_image = null
+                    fotobarUI.showNextImage(null);
+                });
+            }).fail(function() {
                                                                               // fotobarUI.alertUser({type : 'error',text : 'Could not get
                                                                               // images.'});
                                                                               }).always(function() {
@@ -234,6 +237,7 @@ FotobarUI.prototype.getImages = function() {
         
         fotobarUI.renderImageView();
         fotobarUI.redrawCurrent();
+        $(".preview_overlay").css('opacity', 0);
         fotobarUI.showNextImage(null);
     }
 };
@@ -355,8 +359,9 @@ FotobarUI.prototype.initialize = function(image, is_new_order) {
         // fotobar.images[image.id].plot_height =
         // Math.floor(fotobar.images[image.id].image_height /
         // fotobar.images[image.id].zoom);
-        fotobar.images[image.id].plot_x = Math.floor(fotobar.images[image.id].tx);
-        fotobar.images[image.id].plot_y = Math.floor(fotobar.images[image.id].ty);
+        
+        fotobar.images[image.id].plot_x = Math.floor(fotobar.images[image.id].tx * fotobar.images[image.id].image_scale);
+        fotobar.images[image.id].plot_y = Math.floor(fotobar.images[image.id].ty * fotobar.images[image.id].image_scale);
         
     }
     
@@ -378,6 +383,13 @@ FotobarUI.prototype.initialize = function(image, is_new_order) {
     input_text.addEventListener('blur', function() {
                                 fotobar.images[image.id].text = $(this).val();
                                 }, false);
+    
+    input_text.addEventListener('keyup', function() {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9.,:;<>%@#+=?$&\'"\_\/\*\- !{}()\[\]]/g, "")); 
+                                                }, false);
+    
+    
+    
     input_text.className = "none";
     input_text.setAttribute("id", "text_" + image.id);
     input_text.setAttribute("placeholder", "Add Caption");
@@ -527,6 +539,7 @@ FotobarUI.prototype.renderEditView = function() {
                            
                            fotobarUI.renderImageView();
                            fotobarUI.redrawCurrent();
+                           $(".preview_overlay").css('opacity', 0);
                            fotobarUI.showNextImage(null);
                            });
     // SHOW WHEN CLOSE $(fotobarUI.current_canvas).css('overflow': 'hidden');
@@ -681,6 +694,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                
                                fotobarUI.renderImageView();
                                fotobarUI.redrawCurrent();
+                               $(".preview_overlay").css('opacity', 0);
                                fotobarUI.showNextImage(null);
                                });
     
@@ -692,9 +706,14 @@ FotobarUI.prototype.renderCheckoutView = function() {
     $('#contact_form').submit(
                               function(e) {
                               e.preventDefault();
-                              // window.scrollTo(0, 0);
+                              var missing_input_errors = [];
                               
                               var hasErrors = false;
+                              var hasCCErrors = false;
+                              var hasShipErrors = false;
+                              var hasLocationErrors = false;
+                              var hasContactErrors = false;
+                              
                               $("input, select").css({
                                                      "border-color" : "#323030"
                                                      });
@@ -713,6 +732,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             if ($(this).val() == 0
                                                                 && pickup_options == 'pick_up') {
                                                             hasErrors = true;
+                                                            hasLocationErrors = true;
                                                             $(this).css({
                                                                         "border-color" : "red"
                                                                         });
@@ -723,6 +743,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             
                                                             if ($(this).val() == '') {
                                                             hasErrors = true;
+                                                            hasContactErrors = true;
                                                             $(this).css({
                                                                         "border-color" : "red"
                                                                         });
@@ -734,6 +755,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($(this)
                                                                                                    .val())) {
                                                             hasErrors = true;
+                                                             hasContactErrors = true;
                                                             $(this).css({
                                                                         "border-color" : "red"
                                                                         });
@@ -745,6 +767,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             if (!/^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/
                                                                 .test($(this).val())) {
                                                             hasErrors = true;
+                                                             hasContactErrors = true;
                                                             $(this).css({
                                                                         "border-color" : "red"
                                                                         });
@@ -760,6 +783,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             case ('ship_state'):
                                                             
                                                             if ($(this).val() == '') {
+                                                            hasShipErrors = true;
                                                             hasErrors = true;
                                                             $(this).css({
                                                                         "border-color" : "red"
@@ -774,6 +798,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             
                                                             if ($(this).val() == '') {
                                                             hasErrors = true;
+                                                            hasShipErrors = true;
                                                             $(this).css({
                                                                         "border-color" : "red"
                                                                         });
@@ -784,6 +809,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                             if (!/^\d{5}(-\d{4})?$/.test($(this)
                                                                                          .val())) {
                                                             hasErrors = true;
+                                                            hasShipErrors = true;
                                                             $(this).css({
                                                                         "border-color" : "red"
                                                                         });
@@ -809,6 +835,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                          
                                                          if (!/^\d{2}$/.test($(this).val())) {
                                                          hasErrors = true;
+                                                         hasCCErrors = true;
                                                          $(this).css({
                                                                      "border-color" : "red"
                                                                      });
@@ -820,6 +847,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                          if (!/^(?:\d){13,16}\b$/.test($(this).val())) {
                                                          
                                                          hasErrors = true;
+                                                         hasCCErrors = true;
                                                          $(this).css({
                                                                      "border-color" : "red"
                                                                      });
@@ -833,6 +861,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                          
                                                          if (!/(^\d{3,4}$)/.test($(this).val())) {
                                                          hasErrors = true;
+                                                         hasCCErrors = true;
                                                          $(this).css({
                                                                      "border-color" : "red"
                                                                      });
@@ -842,6 +871,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                          
                                                          if (!/^(0[1-9]|1[0-2])$/.test($(this).val())) {
                                                          hasErrors = true;
+                                                         hasCCErrors = true;
                                                          $(this).css({
                                                                      "border-color" : "red"
                                                                      });
@@ -851,6 +881,7 @@ FotobarUI.prototype.renderCheckoutView = function() {
                                                          case ('cc_zip'):
                                                          if (!/^\d{5}(-\d{4})?$/.test($(this).val())) {
                                                          hasErrors = true;
+                                                         hasCCErrors = true;
                                                          $(this).css({
                                                                      "border-color" : "red"
                                                                      });
@@ -877,9 +908,17 @@ FotobarUI.prototype.renderCheckoutView = function() {
                               
                               } else {
                               
+                              
+                              var alert_text = 'Please Confirm the Following:<BR>'
+                              
+                              if(hasContactErrors){alert_text += '<BR> * Contact Information *'}
+                              if(hasShipErrors){alert_text += '<BR> * Shipping Information *'}
+                              if(hasLocationErrors){alert_text += '<BR> * Pick Up Location *'}
+                              if(hasCCErrors){alert_text += '<BR> * Credit Card Information *'}
+                              
                               fotobarUI.alertUser({
                                                   type : 'error',
-                                                  text : 'Please confirm your information is correct.'
+                                                  text : alert_text
                                                   });
                               }
                               
@@ -1005,6 +1044,7 @@ FotobarUI.prototype.renderImageSrcView = function() {
                                    
                                    fotobarUI.renderImageView();
                                    fotobarUI.redrawCurrent();
+                                   $(".preview_overlay").css('opacity', 0);
                                    fotobarUI.showNextImage(null);
                                    }
                                    });
@@ -1295,6 +1335,7 @@ FotobarUI.prototype.deleteButtonClick = function() {
                                    fotobarUI.current_image = null;
                                    fotobarUI.renderImageView();
                                    fotobarUI.redrawCurrent();
+                                   $(".preview_overlay").css('opacity', 0);
                                    fotobarUI.showNextImage(null);
                                    
                                    } else {
@@ -1752,6 +1793,7 @@ FotobarUI.prototype.showRemoteAlbums = function(albums) {
                                     
                                     fotobarUI.renderImageView();
                                     fotobarUI.redrawCurrent();
+                                    $(".preview_overlay").css('opacity', 0);
                                     fotobarUI.showNextImage(null);
                                     }
                                     });
@@ -1850,47 +1892,6 @@ FotobarUI.prototype.getSelectCount = function(selected_images) {
                             });
     }
     return (remainderCount);
-};
-
-FotobarUI.prototype.postS3 = function(imageURI, fileName) {
-    
-    var deferred = $.Deferred(), ft = new FileTransfer(), options = new FileUploadOptions();
-    var policyAPI = new FotobarRest(fotobarConfig.configure.servers.api);
-    var file_type = fileName.substr(fileName.lastIndexOf('.') + 1);
-    
-    options.fileKey = "file";
-    options.fileName = fileName;
-    options.mimeType = fotobarUI.mime_types[file_type];
-    options.chunkedMode = false;
-    
-    var dataObj = {
-        "fileName" : fileName
-    };
-    var getPolicy = policyAPI.postCall('policy', dataObj);
-    
-    getPolicy.done(function(data) {
-                   
-                   options.params = {
-                   "key" : fileName,
-                   "AWSAccessKeyId" : data.message.awsKey,
-                   "acl" : "public-read",
-                   "policy" : data.message.policy,
-                   "signature" : data.message.signature,
-                   "Content-Type" : "image/jpeg"
-                   };
-                   
-                   ft.upload(imageURI, "https://" + data.message.bucket
-                             + ".s3.amazonaws.com/", function(e) {
-                             deferred.resolve(e);
-                             }, function(e) {
-                             fotobarUI.alertUser({
-                                                 type : 'error',
-                                                 message : "Upload failed: " + JSON.stringify(e)
-                                                 });
-                             deferred.reject(e);
-                             }, options);
-                   });
-    return deferred.promise();
 };
 
 FotobarUI.prototype.repopForm = function(form) {

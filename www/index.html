@@ -364,7 +364,7 @@
                                             <script id="image-preview" type="text/template">	
                                                 
                                                 <div class="wrapper">
-                                                
+                                                <div class="preview_overlay">LOADING...</div>
                                                 <div class="header-controls-container">
                                                 
                                                 <div class="header-controls">
@@ -485,16 +485,16 @@
                                                 
                                                 <div id="dialog">
                                                 <ul class='upload_process'>
-                                                <li class="process_loading">Compiling Order</li>
-                                                <li>Uploading Image <span id="image_upload_count"></span><span
-                                                id="status"></span></li>
-                                                <li>Migrating Images to the Cloud</li>
+                                                <li class="process_loading">Creating Secure Connection</li>
+                                                <li>Uploading Your Images <span id="image_upload_count"></span></li>
+                                                <li id="cardProcessDialog" style="display:none">Processing Your Credit Card</li>
+                                                <li>Processing Your Order</li>
+                                                <li>Order Complete</li>
                                                 </ul>
                                                 <progress id="progressBar" value="0" max="100"></progress>
                                                 <strong>Progress&nbsp;&nbsp;&nbsp;<span id="progress_percent">0</span>%
                                                 </strong>
                                                 </div>
-                                                
                                                 
                                                 <div class="checkout">
                                                 <form id="contact_form" name="contact_form">

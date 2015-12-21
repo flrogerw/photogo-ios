@@ -1,6 +1,6 @@
 var FotobarConfig = function() {
     
-    this.is_debug = false;
+    this.is_debug = true;
     this.root_directory = 'Photogo';
     this.aws_container = 'loopback-upload'
     this.ig_auth_url = 'https://api.instagram.com/oauth/authorize';
@@ -135,7 +135,7 @@ FotobarConfig.prototype.initialize = function() {
                                       
                                       fotobarConfig.errors.archive = JSON.stringify(e);
                                       fotobarConfig.updateArchive();
-                                      fotobarConfig.errors.display.push({type : 'error',text : 'Could not read Settings file'});
+                                      //fotobarConfig.errors.display.push({type : 'error',text : 'Could not read Settings file'});
                                       });
                       
                       initReader.always(function() {

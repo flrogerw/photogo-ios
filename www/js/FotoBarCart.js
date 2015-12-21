@@ -42,20 +42,22 @@ FotobarCart.prototype.setTaxRate = function(zip_code, delivery_option) {
                       var getAPI = new FotobarRest(fotobarConfig.configure.servers.api);
                       
                       var getTax = getAPI.getCall('getTax', {
-                                                  zip_code : zip_code
+                                                  zip_code : zip_code,
                                                   });
                       
-                      getTax.done(function(data) {
-                                  
-                                  if( !data.ship_tax && fotobarCart.is_shipped){
-                                    fotobarCart.tax_rate = 0;
-                                  }else{
-                                    fotobarCart.tax_rate = parseFloat(data.tax_rate).toFixed(4);
-                                  }
-                                  
-                                  fotobarCart.taxByZip[delivery_option] = zip_code;
-                                  fotobarCart.taxByZip[zip_code] = fotobarCart.tax_rate;
-                                  });
+                      getTax
+                      .done(function(data) {
+                            
+                            if (!data.ship_tax && fotobarCart.is_shipped) {
+                            fotobarCart.tax_rate = 0;
+                            } else {
+                            fotobarCart.tax_rate = parseFloat(data.tax_rate)
+                            .toFixed(4);
+                            }
+                            
+                            fotobarCart.taxByZip[delivery_option] = zip_code;
+                            fotobarCart.taxByZip[zip_code] = fotobarCart.tax_rate;
+                            });
                       
                       getTax.always(function() {
                                     self.resolve();
@@ -188,83 +190,136 @@ FotobarCart.prototype.getItemCount = function(sku) {
     return (returnQuantity);
 };
 
-FotobarCart.prototype.uploadImages = function(customer_form, itemIterator) {
+FotobarCart.prototype.postCustomerForm = function(customer_form) {
     
-    var postAPI = new FotobarRest(fotobarConfig.configure.servers.api);
-    // var orderForm = new FormData();
+    return $.Deferred(function() {
+                      
+                      var self = this;
+                      
+                      var postAPI = new FotobarRest(fotobarConfig.configure.servers.api);
+                      
+                      fotobarUI.updateCheckoutProgress(75, 1);
+                      
+                      var imageStrings = fotobar.getImagesOrderString(Object
+                                                                      .keys(fotobarCart.items));
+                      
+                      customer_form.items = fotobarCart.items;
+                      
+                      var postOrder = postAPI.postCall('postorder', {
+                                                       order : customer_form,
+                                                       images : imageStrings
+                                                       });
+                      
+                      postOrder.done(function(data) {
+                                     
+                                     self.resolve();
+                                     });
+                      
+                      postOrder.fail(function(err) {
+                                     
+                                     self.reject({
+                                                 type : 'error',
+                                                 text : err
+                                                 });
+                                     });
+                      });
+};
+
+FotobarCart.prototype.postS3 = function(imageURI, fileName) {
+    
+    var deferred = $.Deferred(), ft = new FileTransfer(), options = new FileUploadOptions();
+    var policyAPI = new FotobarRest(fotobarConfig.configure.servers.api);
+    var file_type = fileName.substr(fileName.lastIndexOf('.') + 1);
+    
+    options.fileKey = "file";
+    options.fileName = fileName;
+    options.mimeType = fotobarUI.mime_types[file_type];
+    options.chunkedMode = false;
+    
+    var dataObj = {
+        "fileName" : fileName
+    };
+    var getPolicy = policyAPI.postCall('policy', dataObj);
+    
+    getPolicy.done(function(data) {
+                   
+                   options.params = {
+                   "key" : fileName,
+                   "AWSAccessKeyId" : data.message.awsKey,
+                   "acl" : "public-read",
+                   "policy" : data.message.policy,
+                   "signature" : data.message.signature,
+                   "Content-Type" : options.mimeType
+                   };
+                   
+                   ft.upload(imageURI, "https://" + data.message.bucket
+                             + ".s3.amazonaws.com/", function(e) {
+                             deferred.resolve(e);
+                             }, function(e) {
+                             
+                             deferred.reject({
+                                             type : 'error',
+                                             text : "Upload failed: " + JSON.stringify(e)
+                                             });
+                             }, options);
+                   });
+    return deferred.promise();
+};
+
+FotobarCart.prototype.uploadImages = function(itemIterator) {
+    
+    // var nextImageId = itemIterator.shift();
     var cartImageCount = Object.keys(fotobarCart.items).length;
-    var nextImageId = itemIterator.shift();
-    var currentUploadCount = (cartImageCount - itemIterator.length);
+    // var currentUploadCount = (cartImageCount - itemIterator.length);
+    var responseCount = 0;
     
-    $('#image_upload_count').html(currentUploadCount + ' of ' + cartImageCount);
-    
-    var current_image = fotobar.images[nextImageId].image;
-    var accountFolder = fotobarConfig.tokens.key + '/'
-    var postToS3 = fotobarUI.postS3(current_image.org_uri, accountFolder
-                                    + current_image.name);
-    
-    postToS3.done(function(response) {
-                  
-                  if (response.responseCode >= 300) {
-                  
-                  fotobarCart.processOrderError(response.response, customer_form);
-                  } else {
-                  
-                  if (itemIterator.length == 0) {
-                  
-                  fotobarUI.updateCheckoutProgress(75, 1);
-                  
-                  var imageStrings = fotobar.getImagesOrderString(Object
-                                                                  .keys(fotobarCart.items));
-                  
-                  customer_form.items = fotobarCart.items;
-                  
-                  var postOrder = postAPI.postCall('postorder', {
-                                                   order : customer_form,
-                                                   images : imageStrings
-                                                   });
-                  
-                  postOrder.done(function(data) {
-                                 
-                                 fotobar.deleteCurrentImages();
-                                 fotobarCart.items = {};
-                                 fotobarUI.slider_index = 0;
-                                 fotobarUI.updateCheckoutProgress(100, 2);
-                                 setTimeout(function() {
-                                            fotobarUI.renderThankyouView();
-                                            //fotobarUI.alertUser({
-                                                              //  type : 'success',
-                                                               // text : 'Your order is complete.'
-                                                               // });
-                                            }, 1000);
-                                 });
-                  
-                  postOrder.fail(function(err) {
-                                 fotobarUI.alertUser({
-                                                     type : 'error',
-                                                     text : err
-                                                     });
-                                 });
-                  
-                  } else {
-                  
-                  fotobarCart.uploadImages(customer_form, itemIterator);
-                  }
-                  }
-                  });
-    
-    postToS3.fail(function(err) {
-                  
-                  fotobarUI.alertUser({
-                                      type : 'error',
-                                      text : 'Could not post to the Server'
-                                      });
-                  });
+    return $.Deferred(function() {
+                      
+                      var self = this;
+                      
+                      while (itemIterator.length > 0) {
+                      
+                      var $nextImageId = itemIterator.shift();
+                      var current_image_$nextImageId = fotobar.images[$nextImageId].image;
+                      var accountFolder = fotobarConfig.tokens.key + '/'
+                      var postToS3_$nextImageId = fotobarCart.postS3(current_image_$nextImageId.org_uri,
+                                                                     accountFolder + current_image_$nextImageId.name);
+                      
+                      postToS3_$nextImageId.done(function(response) {
+                                                 
+                                                 if (response.responseCode >= 300) {
+                                                 self.reject(response.response);
+                                                 
+                                                 } else {
+                                                 
+                                                 responseCount++;
+                                                 $('#image_upload_count').html(
+                                                                               responseCount + ' of ' + cartImageCount);
+                                                 if (responseCount == cartImageCount) {
+                                                 self.resolve();
+                                                 }
+                                                 }
+                                                 });
+                      
+                      postToS3_$nextImageId.fail(function(err) {
+                                                 
+                                                 self.reject({
+                                                             type : 'error',
+                                                             text : 'Could Not Post Images to the Server'
+                                                             });
+                                                 });
+                      }
+                      });
 };
 
 FotobarCart.prototype.processOrder = function(customer_form, cc_form) {
     
     $("#dialog").show();
+    
+    if (fotobarCart.is_cc_charge){
+        $("#cardProcessDialog").show();
+    }
+    
     $('#dialog').center();
     $(window).scroll(function() {
                      $('#dialog').center();
@@ -274,47 +329,131 @@ FotobarCart.prototype.processOrder = function(customer_form, cc_form) {
     pickup_option = (pickup_option == 'ship') ? 'shipped' : $(
                                                               "#location_select option:selected").text();
     
-    setTimeout(function() {
+    setTimeout(
+               function() {
                
                var itemIterator = Object.keys(fotobarCart.items);
                var pingServer = fotobarConfig.pingServer();
-               pingServer.done(function() {
-                               
-                               if (fotobarCart.is_cc_charge) {
-                               
-                               var payment = new FotobarPayment();
-                               var order_data = {
-                               identifier : customer_form.email,
-                               amount : fotobarCart.getGrandTotal(),
-                               tax_total : fotobarCart.getTaxTotal(),
-                               location : pickup_option,
-                               ship_total : fotobarCart.getShippingTotal(),
-                               auth_only : (pickup_option == 'shipped') ? true : false,
-                               debug: fotobarConfig.isDebug()
-                               };
-                               
-                               var getCharge = payment.postStripeCharge(cc_form, order_data);
-                               getCharge.done(function(data) {
-                                              
-                                              var stripeCharge = JSON.parse(data);
-                                              customer_form.stripe_token = stripeCharge.message
-                                              fotobarUI.updateCheckoutProgress(25, 0);
-                                              fotobarCart.uploadImages(customer_form, itemIterator);
-                                              });
-                               
-                               getCharge.fail(function(error) {
-                                              
-                                              fotobarUI.alertUser(error);
-                                              $("#dialog").hide();
-                                              });
-                               
-                               } else {
-                               
-                               fotobarUI.updateCheckoutProgress(25, 0);
-                               fotobarCart.uploadImages(customer_form, itemIterator);
-                               
-                               }
-                               });
+               pingServer
+               .done(function() {
+                     
+                     fotobarUI.updateCheckoutProgress(25, 0);
+                     var uploadImages = fotobarCart.uploadImages(itemIterator);
+                     
+                     uploadImages.done(function() {
+                                       
+                                       fotobarUI.updateCheckoutProgress(50, 1);
+                                       if (fotobarCart.is_cc_charge) {
+                                       
+                                       
+                                       var payment = new FotobarPayment();
+                                       var order_data = {
+                                       identifier : customer_form.email,
+                                       amount : fotobarCart
+                                       .getGrandTotal(),
+                                       tax_total : fotobarCart
+                                       .getTaxTotal(),
+                                       location : pickup_option,
+                                       ship_total : fotobarCart
+                                       .getShippingTotal(),
+                                       auth_only : (pickup_option == 'shipped') ? true
+                                       : false,
+                                       debug : fotobarConfig.isDebug()
+                                       };
+                                       
+                                       var getCharge = payment
+                                       .postStripeCharge(cc_form,
+                                                         order_data);
+                                       
+                                       fotobarUI.updateCheckoutProgress(62, 1);
+                                       getCharge.done(function(data) {
+                                                      
+                                                      fotobarUI.updateCheckoutProgress(62, 2);
+                                                      
+                                                      var stripeCharge = JSON
+                                                      .parse(data);
+                                                      customer_form.stripe_token = stripeCharge.message
+                                                      fotobarUI.updateCheckoutProgress(75, 2);
+                                                      
+                                                      var postCustomerForm = fotobarCart
+                                                      .postCustomerForm(customer_form);
+                                                      postCustomerForm
+                                                      .done(function() {
+                                                            
+                                                            fotobarUI.updateCheckoutProgress(75, 3);
+                                                            fotobar
+                                                            .deleteCurrentImages();
+                                                            fotobarCart.items = {};
+                                                            fotobarUI.slider_index = 0;
+                                                            fotobarUI
+                                                            .updateCheckoutProgress(
+                                                                                    100,
+                                                                                    4);
+                                                            setTimeout(
+                                                                       function() {
+                                                                       fotobarUI.renderThankyouView();
+                                                                       },
+                                                                       1000);
+                                                            
+                                                            });
+                                                      
+                                                      postCustomerForm
+                                                      .fail(function(
+                                                                     error) {
+                                                            
+                                                            fotobarCart
+                                                            .processOrderError(
+                                                                               error,
+                                                                               customer_form);
+                                                            });
+                                                      
+                                                      });
+                                       
+                                       getCharge.fail(function(error) {
+                                                      
+                                                      fotobarCart.processOrderError(
+                                                                                    error, customer_form);
+                                                      });
+                                       
+                                       } else {
+                                       
+                                       fotobarUI.updateCheckoutProgress(
+                                                                        75, 2);
+                                       var postCustomerForm = fotobarCart
+                                       .postCustomerForm(customer_form);
+                                       postCustomerForm
+                                       .done(function() {
+                                             fotobarUI.updateCheckoutProgress(75, 3);
+                                             fotobar
+                                             .deleteCurrentImages();
+                                             fotobarCart.items = {};
+                                             fotobarUI.slider_index = 0;
+                                             fotobarUI
+                                             .updateCheckoutProgress(
+                                                                     100, 4);
+                                             setTimeout(
+                                                        function() {
+                                                        fotobarUI.renderThankyouView();
+                                                        }, 1000);
+                                             
+                                             });
+                                       
+                                       postCustomerForm.fail(function(
+                                                                      error) {
+                                                             
+                                                             fotobarCart.processOrderError(
+                                                                                           error, customer_form);
+                                                             });
+                                       }
+                                       });
+                     
+                     uploadImages.fail(function(response) {
+                                       
+                                       fotobarCart.processOrderError(response,
+                                                                     customer_form);
+                                       });
+                     
+                     });
                
                pingServer.fail(function(err) {
                                
@@ -453,8 +592,7 @@ FotobarCart.prototype.filter = function(sku, haystack) {
  * FotobarCart.prototype.filterTaxState = function(state) {
  * 
  * var item = fotobarConfig.locations.filter(function(obj) { return obj.state
- * === state; })[0];
- *  };
+ * === state; })[0]; };
  */
 
 FotobarCart.prototype.updateQuantity = function(itemSku, itemQuantity, imageId) {

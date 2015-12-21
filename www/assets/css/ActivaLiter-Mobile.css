@@ -560,3 +560,14 @@ select option { color: black; }
     line-height: 100vh;
     display: none;
 }
+
+.preview_overlay {
+    position: relative;
+    top: 0px;
+    width: 100vw;
+    height: 90vh;
+    background: #c0c0c0;
+    opacity: .9;
+    text-align: center;
+    line-height: 90vh;
+}
