@@ -1,6 +1,6 @@
 var FotobarConfig = function() {
     
-    this.is_debug = true;
+    this.is_debug = false;
     this.root_directory = 'Photogo';
     this.aws_container = 'loopback-upload'
     this.ig_auth_url = 'https://api.instagram.com/oauth/authorize';
