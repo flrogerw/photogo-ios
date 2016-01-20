@@ -1,5 +1,3 @@
-console.log('here');
-
 (function($) {
 
  $.mobile.autoInitializePage = false;
