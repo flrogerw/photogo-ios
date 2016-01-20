@@ -6,21 +6,15 @@ var Fotobar = function() {
     this.current_id;
     this.canvasSetHeight = Math.floor($(window).width() * .8);// 295
     this.canvasSetWidth = Math.floor(this.canvasSetHeight * .8474);// 250
-    
-    
-    
-    this.polaroidWidth = Math.ceil(this.canvasSetWidth * .89); // 222
-    this.polaroidHeight = this.polaroidWidth; // 222
-    this.fullFrameWidth = this.polaroidWidth; // 222
+    //this.polaroidWidth = Math.ceil(this.canvasSetWidth * .89); // 222
+    //this.polaroidHeight = this.polaroidWidth; // 222
+    this.fullFrameWidth = Math.ceil(this.canvasSetWidth * .89); // 222
     this.fullFrameHeight = Math.ceil(this.fullFrameWidth * 1.2027); // 267
-    this.spectraWidth = this.fullFrameHeight;// 267
-    this.spectraHeight = Math.ceil(this.spectraWidth * .6367);// 170
     this.frame_margin = {
         x : Math.floor(this.canvasSetWidth * .056),
         y : Math.floor(this.canvasSetWidth * .056)
     };
     this.add_text = false;
-    
 };
 
 Fotobar.prototype.deleteCurrentImages = function() {
@@ -71,7 +65,8 @@ Fotobar.prototype.getRemoteImage = function(remote_url) {
                       var self = this;
                       var writer = new FotobarFileWriter();
                       var download_link = encodeURI(remote_url);
-                      var filename = remote_url.split('/').pop().split(/[?#]/)[0].replace(/[^a-z0-9]/gi, "_");
+                      var filename = remote_url.split('/').pop().split(/[?#]/)[0].replace(/[^a-z0-9]/gi, "_");// .replace(/\.[^/.]+$/,
+                      // "");
                       
                       var getFileSystem = writer.getDownloadDir(fotobarConfig.root_directory
                                                                 + '/cache');
@@ -100,34 +95,6 @@ Fotobar.prototype.getRemoteImage = function(remote_url) {
                       });
 };
 
-Fotobar.prototype.getImageUpload = function(imageId) {
-    
-    return $.Deferred(function() {
-                      
-                      var self = this;
-                      var imageSrc = fotobar.images[imageId].image.org_uri;
-                      
-                      window.resolveLocalFileSystemURL(imageSrc, function(fileEntry) {
-                                                       
-                                                       fileEntry.file(function(file) {
-                                                                      
-                                                                      var reader = new FileReader();
-                                                                      reader.onloadend = function(e) {
-                                                                      var blob = new Blob([ e.target.result ], {
-                                                                                          type : "image/jpeg"
-                                                                                          });
-                                                                      //var reader = null;
-                                                                      self.resolve(blob);
-                                                                      }
-                                                                      reader.readAsArrayBuffer(file);
-                                                                      });
-                                                       }, function(err) {
-                                                       
-                                                       alert(JSON.stringify(err));
-                                                       });
-                      });
-};
-
 Fotobar.prototype.factory = function(imageArray) {
     
     return $.Deferred(function() {
@@ -147,7 +114,7 @@ Fotobar.prototype.factory = function(imageArray) {
                       newImage.onload = function() {
                       
                       var that = this;
-                
+                      
                       var getExif = fotobar.getExif( that );
                       
                       getExif.done(function(exif){
@@ -164,14 +131,14 @@ Fotobar.prototype.factory = function(imageArray) {
                                    that.tmpImage.name = that.tmpImage.id + '_'
                                    + that.tmpImage.name + '.' + that.tmpImage.name.substr(that.tmpImage.name.lastIndexOf('_') + 1);
                                    
-                                   
-                                   
                                    fotobar.images[that.id] = new Polaroid(that.tmpImage);
                                    
                                    fotobar.images[that.id].is_landscape = exif.is_landscape;
                                    fotobar.images[that.id].is_square = exif.is_square;
                                    fotobar.images[that.id].aspect_ratio = exif.aspect_ratio;
                                    
+                                   fotobar.images[that.id].format = ( fotobar.images[that.id].is_landscape === true )? 3: 2;
+                                   fotobar.images[that.id].text_ribbon_height = Math.floor($(window).height() * .065);
                                    
                                    fotobarUI.initialize(that, true);
                                    fotobar.setImageParams(fotobar.images[that.id]);
@@ -188,7 +155,7 @@ Fotobar.prototype.factory = function(imageArray) {
                                    }
                                    
                                    });
-            
+                      
                       }
                       newImage.src = imageArray[i][1];
                       }
@@ -199,48 +166,47 @@ Fotobar.prototype.getExif = function( image ){
     
     return $.Deferred(function() {
                       
-    var self = this;
+                      var self = this;
                       
-    
-    EXIF.getData(image, function() {
-                 
-                 var exif = {
-                 is_square: false,
-                 is_landscape: false
-                 };
-                
-                 var tmpHeight = ( typeof( EXIF.getTag(this, "PixelYDimension")) == 'undefined')? image.height: EXIF.getTag(this, "PixelYDimension");
-                 var tmpWidth = ( typeof( EXIF.getTag(this, "PixelXDimension")) == 'undefined')? image.width: EXIF.getTag(this, "PixelXDimension");
-                
-                 exif.orientation = ( typeof EXIF.getTag(this, "Orientation") == 'undefined' )? 1: EXIF.getTag(this, "Orientation");
-                 exif.height = ( fotobar.contains( [6], exif.orientation) )? tmpWidth: tmpHeight;
-                 exif.width = ( fotobar.contains( [6], exif.orientation) )? tmpHeight: tmpWidth;
-                 
-                 
-                 exif.aspect_ratio = exif.height / exif.width;
-                 
-                 switch (true) {
-                 
-                 case (exif.height < exif.width ):
-                 
-                 exif.is_landscape = true;
-                 exif.aspect_ratio = exif.width / exif.height;
-                 
-                 break;
-                 
-                 case (exif.height == exif.width):
-                 
-                 exif.is_square = true;
-                 exif.aspect_ratio = 1;
-                 break;
-                 }
-
-                 
-                 self.resolve( exif );
-        });
-    });
+                      EXIF.getData(image, function() {
+                                   
+                                   var exif = {
+                                   is_square: false,
+                                   is_landscape: false
+                                   };
+                                   
+                                   var tmpHeight = ( typeof( EXIF.getTag(this, "PixelYDimension")) == 'undefined')? image.height: EXIF.getTag(this, "PixelYDimension");
+                                   var tmpWidth = ( typeof( EXIF.getTag(this, "PixelXDimension")) == 'undefined')? image.width: EXIF.getTag(this, "PixelXDimension");
+                                   
+                                   exif.orientation = ( typeof EXIF.getTag(this, "Orientation") == 'undefined' )? 1: EXIF.getTag(this, "Orientation");
+                                   exif.height = ( fotobar.contains( [6], exif.orientation) )? tmpWidth: tmpHeight;
+                                   exif.width = ( fotobar.contains( [6], exif.orientation) )? tmpHeight: tmpWidth;
+                                   
+                                   
+                                   exif.aspect_ratio = exif.height / exif.width;
+                                   
+                                   switch (true) {
+                                   
+                                   case (exif.height < exif.width ):
+                                   
+                                   exif.is_landscape = true;
+                                   exif.aspect_ratio = exif.width / exif.height;
+                                   
+                                   break;
+                                   
+                                   case (exif.height == exif.width):
+                                   
+                                   exif.is_square = true;
+                                   exif.aspect_ratio = 1;
+                                   break;
+                                   }
+                                   
+                                   
+                                   self.resolve( exif );
+                                   });
+                      });
 };
-             
+
 Fotobar.prototype.imageCount = function() {
     
     return (Object.keys(fotobar.images).length);
@@ -259,85 +225,92 @@ Fotobar.prototype.setImageParams = function(current_image) {
     
     switch (current_image.format) {
             
-        case (1):
-            
-            $(current_canvas).height(this.polaroidHeight);
-            current_image.height = this.polaroidHeight;
-            $(current_canvas).width(this.polaroidWidth);
-            $(current_canvas).css({
-                                  "top" : this.frame_margin.x,
-                                  "left" : this.frame_margin.y
-                                  });
-            current_image.width = this.polaroidWidth;
-            $(image_container).width(this.canvasSetWidth);
-            $(image_container).height(this.canvasSetHeight);
-            
-            current_image.canvas_width = current_image.width;
-            current_image.canvas_height = current_image.width * current_image.aspect_ratio;
-            
-            if(current_image.is_landscape){
-                current_image.canvas_width = [current_image.canvas_height, current_image.canvas_height = current_image.canvas_width][0];
-            }
-            current_image.plot_width = Math.floor((current_image.width * current_image.image_scale));
-            current_image.plot_height = Math.floor((current_image.height * current_image.image_scale));
-            break;
-            
         case (2):
             
             $(current_canvas).height(this.fullFrameHeight);
             $(current_canvas).width(this.fullFrameWidth);
+            current_image.guillotine_width = this.fullFrameWidth;
+            current_image.guillotine_height = this.fullFrameHeight;
             $(current_canvas).css({
                                   "top" : this.frame_margin.x,
                                   "left" : this.frame_margin.y
                                   });
-            current_image.height = this.fullFrameHeight;
-            current_image.width = this.fullFrameWidth;
+            
+            switch(true){
+                    
+                case(current_image.is_square):
+                    
+                    current_image.height = current_image.width = this.fullFrameHeight;
+                    current_image.canvas_width = current_image.canvas_height = current_image.width;
+                    break;
+                    
+                case(current_image.is_landscape):
+                    
+                    current_image.height = this.fullFrameWidth;
+                    current_image.width = this.fullFrameHeight;
+                    current_image.canvas_width = current_image.width * current_image.aspect_ratio;;
+                    current_image.canvas_height =  current_image.width;
+                    break;
+                    
+                default:
+                    
+                    current_image.height = this.fullFrameHeight;
+                    current_image.width = this.fullFrameWidth;
+                    current_image.canvas_width = current_image.width;
+                    current_image.canvas_height = current_image.width * current_image.aspect_ratio;
+                    break;
+            }
+            
             $(image_container).width(this.canvasSetWidth);
             $(image_container).height(this.canvasSetHeight);
-            current_image.canvas_width = current_image.width;
-            current_image.canvas_height = current_image.width * current_image.aspect_ratio;
-            current_image.plot_width = Math.floor((current_image.width * current_image.image_scale));
-            current_image.plot_height = Math.floor((current_image.height * current_image.image_scale));
             break;
             
         case (3):
             
             $(current_canvas).height(this.fullFrameWidth);
             $(current_canvas).width(this.fullFrameHeight);
+            current_image.guillotine_width = this.fullFrameHeight;
+            current_image.guillotine_height = this.fullFrameWidth;
             $(current_canvas).css({
                                   "top" : this.frame_margin.x,
                                   "left" : this.frame_margin.y
                                   });
-            current_image.width = this.fullFrameHeight;
-            current_image.height = this.fullFrameWidth;
+            
+            
+            switch(true){
+                    
+                case(current_image.is_square):
+                    
+                    current_image.width = current_image.height = this.fullFrameHeight;
+                    current_image.canvas_width = current_image.canvas_height = current_image.width;
+                    break;
+                    
+                case(!current_image.is_landscape):
+                    
+                    current_image.width = this.fullFrameHeight;
+                    current_image.height = this.fullFrameWidth;
+                    current_image.canvas_height = current_image.width * current_image.aspect_ratio;
+                    current_image.canvas_width = current_image.width;	
+                    break;
+                    
+                default:
+                    
+                    current_image.width = this.fullFrameWidth;
+                    current_image.height = this.fullFrameHeight;
+                    current_image.canvas_width = current_image.width * current_image.aspect_ratio;
+                    current_image.canvas_height = current_image.width;	
+                    break;
+                    
+            }
+            
             $(image_container).width(this.canvasSetHeight);
-            $(image_container).height(this.canvasSetWidth);
-            current_image.canvas_width = current_image.width * current_image.aspect_ratio;
-            current_image.canvas_height = current_image.width;
-            current_image.plot_width = Math.floor((current_image.width * current_image.image_scale));
-            current_image.plot_height = Math.floor((current_image.height * current_image.image_scale));
-            
-            break;
-            
-        case (4):
-            
-            $(current_canvas).height(this.spectraHeight);
-            $(current_canvas).width(this.spectraWidth);
-            $(current_canvas).css({
-                                  "top" : this.frame_margin.x,
-                                  "left" : this.frame_margin.y
-                                  });
-            current_image.width = this.spectraWidth;
-            current_image.height = this.spectraHeight;
-            $(image_container).width(this.canvasSetHeight);
-            $(image_container).height(this.canvasSetWidth);
-            current_image.canvas_width = current_image.width * current_image.aspect_ratio;
-            current_image.canvas_height = current_image.width;
-            current_image.image_scale = ( current_image.image_width / fotobar.polaroidWidth);
-            current_image.plot_width = Math.floor((current_image.width * current_image.image_scale));
-            current_image.plot_height = Math.floor((current_image.height * current_image.image_scale));
+            $(image_container).height(this.canvasSetWidth);		
             break;
     }
+    
+    current_image.plot_width = Math.floor((current_image.width * current_image.image_scale));
+    current_image.plot_height = Math.floor((current_image.height * current_image.image_scale)); 
+    current_image.text_ribbon_width = (current_image.text_ribbon_width < 0 )? current_image.guillotine_width: current_image.text_ribbon_width;
 };
 
 Fotobar.prototype.getRandom = function() {
@@ -362,4 +335,27 @@ Fotobar.prototype.contains = function(haystack, needle) {
         }
     }
     return false;
+};
+
+Fotobar.prototype.setCanvasRotation = function(current_image) {
+    
+    fotobar.images[current_image.id].aspect_ratio = current_image.height
+    / current_image.width;
+    
+    switch (true) {
+            
+        case (current_image.height < current_image.width):
+            
+            fotobar.images[current_image.id].is_landscape = true;
+            fotobar.images[current_image.id].aspect_ratio = current_image.width / current_image.height;
+            
+            break;
+            
+        case (current_image.height == current_image.width):
+            
+            fotobar.images[current_image.id].is_square = true;
+            fotobar.images[current_image.id].aspect_ratio = 1;
+            break;
+    }
+    
 };

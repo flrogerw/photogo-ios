@@ -20,17 +20,26 @@ var Polaroid = function(image) {
     this.plot_height;
     this.plot_x = 0;
     this.plot_y = 0;
-    this.is_spectra = false;
-    this.is_polaroid = true;
+    this.plot_ribbon_x = 0;
+    this.plot_ribbon_y = 0;
+    //this.is_spectra = false;
+    //this.is_polaroid = false;
     this.zoom = 1;
     this.scale = 0.001;
-    this.format = 1;
+    this.format = 2;
     this.effect = null;
     this.text = '';
     this.location_url;
     this.is_remote = true;
     this.timestamp;
-    this.orientation = image.orientation;
-
-    
+    this.text_ribbon_y = 0;
+    this.text_ribbon_x = 0;
+    this.text_ribbon_width = -1;
+    this.text_ribbon_height;
+    this.text_rotation = 0;
+    this.text_font = 'marydale';
+    this.text_font_color = '#ffffff';
+    this.text_ribbon_bg = "rgba(0,0,0,0.4)";
+    this.guillotine_width;
+    this.guillotine_height;
 };

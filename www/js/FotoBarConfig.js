@@ -1,16 +1,15 @@
 var FotobarConfig = function() {
     
-    this.is_debug = false;
+    this.is_debug = true;
     this.root_directory = 'Photogo';
     this.aws_container = 'loopback-upload'
     this.ig_auth_url = 'https://api.instagram.com/oauth/authorize';
     this.ig_app_id = '87a6373396d941eab4b61a3cfa7259a5';
     this.ig_redirect = 'http://photoandgo.com';
     this.ig_api_url = 'https://api.instagram.com/v1/';
-    //this.stripe_pk = 'pk_test_gj1pPepZi2KqMUl8wtHB8YZE';
-    
     
     this.stripe_pk = ( this.is_debug === true )? 'pk_test_nSZz2pA51q7nF3nP0oxTXN0g': 'pk_live_wePip2ZEAbuzTeRPqIheTrDO';// mine = live
+    
     this.stripe_script_url = 'https://js.stripe.com/v2/';
     this.products;
     this.server_alive = false;
@@ -145,10 +144,10 @@ FotobarConfig.prototype.initialize = function() {
                                         
                                         var getUser = fotobarConfig.getUser();
                                         getUser.done(function(user) {
-                                                    
+                                                     
                                                      var getLocations = fotobarConfig.getLocations();
                                                      getLocations.done(function(locations) {
-                                                           
+                                                                       
                                                                        var getProducts = fotobarConfig.getProducts();
                                                                        getProducts.done(function(products) {
                                                                                         
@@ -182,6 +181,7 @@ FotobarConfig.prototype.isDebug = function() {
     return fotobarConfig.is_debug;
 };
 
+
 FotobarConfig.prototype.pingServer = function() {
     
     return $.Deferred(function() {
@@ -190,7 +190,7 @@ FotobarConfig.prototype.pingServer = function() {
                       var multiplier = Math.random().toString(36).slice(2);
                       var app_id = md5( device.uuid + multiplier.slice(-3) );
                       
-                      var pingCall = fotobarConfig.configAPI.postCall('ping', {app_id: app_id,location: multiplier} );
+                      var pingCall = fotobarConfig.configAPI.postCall('ping', {is_debug: fotobarConfig.isDebug(), app_id: app_id,location: multiplier} );
                       pingCall.done(function(data) {
                                     
                                     if (data.error === true) {
@@ -312,6 +312,8 @@ FotobarConfig.prototype.getLocations = function() {
                                          });
                       
                       locationsCall.fail(function(e) {
+                                         
+                                         alert(JSON.stringify(e));
                                          
                                          fotobarConfig.locations = false;
                                          fotobarConfig.errors.display.push({

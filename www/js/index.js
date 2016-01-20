@@ -1,3 +1,5 @@
+console.log('here');
+
 (function($) {
 
  $.mobile.autoInitializePage = false;
@@ -57,7 +59,7 @@ $(document).ready(
                   
 			
 			document.addEventListener('deviceready', function() {
-               
+                                      
 				//navigator.app.clearCache();
 				cordova.exec.setJsToNativeBridgeMode(cordova.exec.jsToNativeModes.XHR_NO_PAYLOAD);
 				$('body').show();
