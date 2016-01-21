@@ -626,6 +626,7 @@ select option {
     /*width: 100%; */
     background-color: rgba(0,0,0,0.0);
     position: relative;
+    padding: 0px;
     
 }
 
@@ -672,6 +673,9 @@ select option {
 #add_text_span {
     white-space:nowrap;
     padding-left:2px;
+    display: inline-block;
+    margin: 0 auto;
+    padding-right: 5px;
 }
 
 .directions-text {
@@ -679,6 +683,14 @@ select option {
     font-size: 14px;
     text-align: center;
     font-weight: bold;
+}
+
+.directions-bold {
+    color: #787878;
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    line-height:32px;
 }
 
 .switch {
@@ -775,7 +787,7 @@ select option {
     background-image: url(../img/green-check.png);
     background-size: 20px;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    /*background-attachment: fixed;*/
     background-position: center; 
 }
 .orientation-unselected {
